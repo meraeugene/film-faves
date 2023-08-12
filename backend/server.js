@@ -2,7 +2,7 @@ require("dotenv").config();
 const express = require("express");
 const app = express();
 const mongoose = require("mongoose");
-const filmRoutes = require("./api");
+const filmRoutes = require("./api/filmRoutes");
 const cors = require("cors");
 
 //middleware
