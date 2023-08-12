@@ -74,7 +74,7 @@ const Recommend = () => {
     }
 
     try {
-      const response = await fetch("http://localhost:4000/api/films", {
+      const response = await fetch("https://film-gwjd.onrender.com/api/films", {
         method: "POST",
         body: formData,
       });

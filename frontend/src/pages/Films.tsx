@@ -10,7 +10,7 @@ const Films = () => {
   } = useFilmsContext();
 
   const fetchFilms = async () => {
-    const result = await axios.get("http://localhost:4000/api/films");
+    const result = await axios.get("https://film-gwjd.onrender.com/api/films");
     const data = result.data.data;
     dispatch({ type: "SET_FILMS", payload: data });
   };
