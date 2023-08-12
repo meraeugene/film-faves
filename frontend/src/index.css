@@ -1,0 +1,194 @@
+@import url("https://fonts.googleapis.com/css2?family=Outfit&display=swap");
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@font-face {
+  font-family: Researcher;
+  src: url(/fonts/Researcher.otf);
+}
+
+@font-face {
+  font-family: Aquire;
+  src: url(/fonts/Aquire.otf);
+}
+
+html {
+  background-color: #010101;
+}
+
+.bg {
+  background: url(/images/hero/bg.png);
+  background-position: center;
+  background-size: cover;
+  min-height: 100vh;
+}
+
+.button {
+  width: 205px;
+  height: 50px;
+  background-color: #2b2b37;
+  color: #fff;
+  border-radius: 4px;
+}
+
+.nav {
+  background-color: #2b2b37;
+  padding: 0.5em 0.8em;
+  position: fixed;
+  top: 0;
+  width: 100%;
+  color: #fff;
+  z-index: 10;
+}
+
+.image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.card-info {
+  min-height: 140px;
+}
+
+.form {
+  max-width: 400px;
+  width: 100%;
+}
+
+.form-body {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  gap: 1em;
+  max-width: 500px;
+  width: 100%;
+  margin: 0 auto;
+}
+
+form .input-box {
+  width: 100%;
+}
+
+form .input-box label {
+  font-style: normal;
+  font-weight: 400;
+  line-height: 150%;
+  font-family: Aquire;
+  letter-spacing: 2.61px;
+}
+
+input[type="file"] {
+  display: none;
+}
+
+form .img-label {
+  color: #fff;
+  height: 40px;
+  width: 100%;
+  background-color: #2b2b37;
+  border: 1px solid rgb(226, 232, 240);
+  border-radius: 6px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5em;
+  font-family: Aquire;
+}
+
+form .input-box input,
+form .input-box select,
+form button,
+form textarea {
+  background: #2b2b37 !important;
+  resize: none;
+  height: 50px;
+}
+
+.login-input {
+  height: 50px;
+}
+
+form textarea {
+  height: 100%;
+  padding: 0.2em 0.5em !important;
+  font-size: 0.9rem !important;
+}
+
+form button {
+  letter-spacing: 3.625px;
+  font-family: Aquire;
+  background-color: transparent !important;
+  height: 45px !important;
+}
+
+.full-width {
+  width: 100% !important;
+}
+
+/* Style for the individual options */
+#category option[value="live-action"],
+#recommend-category option[value="live-action"],
+#category option[value="animation"],
+#recommend-category option[value="animation"],
+#category option[value="all"] {
+  background-color: #2b2b37;
+  color: #fff;
+}
+
+#category {
+  width: 100%;
+  max-width: 250px;
+  outline: none;
+  border: 1px solid white;
+  background-color: transparent;
+  height: 40px;
+  padding: 0.2em 0.7em;
+  border-radius: 4px;
+  margin-top: 2em;
+}
+
+/* media query */
+@media screen and (min-width: 320px) {
+  .films {
+    padding: 4em 2em 2em 2em;
+  }
+}
+
+@media screen and (min-width: 375px) {
+  .films {
+    padding: 4em 2em 2em 2em;
+  }
+}
+
+@media screen and (max-width: 426px) {
+  #category {
+    max-width: 100% !important;
+    width: 100%;
+  }
+
+  form .input-box {
+    width: calc(50% - 20px);
+    width: 100%;
+  }
+}
+
+@media screen and (min-width: 768px) {
+  .films,
+  .recommend {
+    padding: 4em;
+    padding-top: 5em;
+  }
+}
+
+@media screen and (min-width: 1024px) {
+  .image {
+    width: 210px;
+  }
+
+  .nav {
+    padding: 0.7em !important;
+  }
+}
