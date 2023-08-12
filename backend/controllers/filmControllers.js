@@ -3,9 +3,6 @@ const mongoose = require("mongoose");
 
 //get all films
 const getFilms = async (req, res) => {
-  // const films = await Film.find({}).sort({ createdAt: -1 });
-  // res.status(200).json(films);
-
   try {
     const films = await Film.find({}).sort({ likes: -1 });
     res.status(200).json({ status: "ok", data: films });
