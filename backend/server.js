@@ -12,13 +12,7 @@ app.use((req, res, next) => {
 });
 
 // Enable CORS for all routes
-app.use(
-  cors({
-    origin: ["https://film-gwjd.onrender.com/api/films"],
-    methods: ["GET", "POST", "PUT", "DELETE", "PATCH"],
-    credentials: true,
-  })
-);
+app.use(cors());
 
 //to get the req.body
 app.use(express.json());
