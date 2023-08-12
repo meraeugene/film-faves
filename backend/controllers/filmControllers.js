@@ -3,6 +3,7 @@ const mongoose = require("mongoose");
 
 //get all films
 const getFilms = async (req, res) => {
+  res.setHeader("Access-Control-Allow-Credentials", "true");
   try {
     const films = await Film.find({}).sort({ likes: -1 });
     res.status(200).json({ status: "ok", data: films });
