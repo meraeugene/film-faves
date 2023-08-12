@@ -12,7 +12,13 @@ app.use((req, res, next) => {
 });
 
 // Enable CORS for all routes
-app.use(cors());
+app.use(
+  cors({
+    origin: ["https://film-faves-api.vercel.app/"],
+    methods: ["GET", "POST", "PUT", "DELETE", "PATCH"],
+    credentials: true,
+  })
+);
 
 //to get the req.body
 app.use(express.json());
