@@ -14,7 +14,7 @@ app.use((req, res, next) => {
 // Enable CORS for all routes
 app.use(
   cors({
-    origin: ["https://film-gwjd.onrender.com/api/films"],
+    origin: ["https://film-gwjd.onrender.com"],
     methods: ["GET", "POST", "PUT", "DELETE", "PATCH"],
     credentials: true,
   })
