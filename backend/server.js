@@ -11,6 +11,12 @@ app.use((req, res, next) => {
   next();
 });
 
+// Allow requests from a specific origin (Vercel frontend)
+const corsOptions = {
+  origin: "https://filmfavesph.vercel.app/",
+  optionsSuccessStatus: 200, // some legacy browsers (IE11, various SmartTVs) choke on 204
+};
+
 // Enable CORS for all routes
 app.use(cors());
 

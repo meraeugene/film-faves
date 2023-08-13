@@ -74,7 +74,7 @@ const Recommend = () => {
     }
 
     try {
-      const response = await fetch("https://film-gwjd.onrender.com/api/films", {
+      const response = await fetch(`${import.meta.env.VITE_API_URL}`, {
         method: "POST",
         body: formData,
       });

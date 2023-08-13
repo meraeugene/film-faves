@@ -79,7 +79,7 @@ const deleteFilm = async (req, res) => {
     return res.status(400).json({ error: "Invalid id " });
   }
 
-  const film = await Film.findOneAndDelete(id);
+  const film = await Film.findOneAndDelete({ _id: id });
 
   if (!film) {
     return res.status(400).json({ error: "No such film" });

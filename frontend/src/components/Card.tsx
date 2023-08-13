@@ -25,7 +25,7 @@ const Card = ({ film }: CardProps) => {
           </h3>
           <span>{film.release_date}</span>
           <h3 className="   text-gray-400">Recommended by :</h3>
-          <span>Andrew</span>
+          <span>Someone</span>
           <h3 className="mt-2 ">
             <span className="  capitalize text-gray-400 ">Genre: </span>
             <span className=" capitalize">{film.genre}</span>

@@ -21,12 +21,12 @@ const LikeButton = ({ initialLikes, filmId }: LikeButtonProps) => {
   const handleLike = async () => {
     try {
       if (isLiked) {
-        await axios.put(`http://localhost:4000/api/films/${filmId}/unlike`);
+        await axios.put(`${import.meta.env.VITE_API_URL}/${filmId}/unlike`);
         setLikes((prevLikes) => prevLikes - 1);
         setIsLiked(false);
         localStorage.setItem(`liked_${filmId}`, "false"); // Update local storage
       } else {
-        await axios.put(`http://localhost:4000/api/films/${filmId}/like`);
+        await axios.put(`${import.meta.env.VITE_API_URL}/${filmId}/like`);
         setLikes((prevLikes) => prevLikes + 1);
         setIsLiked(true);
         localStorage.setItem(`liked_${filmId}`, "true"); // Update local storage
