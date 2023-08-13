@@ -48,7 +48,7 @@ const Card = ({ film }: CardProps) => {
             {film.title}
           </h3>
           <span>{film.release_date}</span>
-          <h3 className="   text-gray-400">Recommended by :</h3>
+          <h3 className="    text-gray-400">Recommended by :</h3>
           <span>User</span>
           <h3 className="mt-2 ">
             <span className="  capitalize text-gray-400 ">Genre: </span>
