@@ -29,7 +29,7 @@ const upload = multer({ storage: storage });
 router.get("/", getFilms);
 
 //create films
-router.post("/", upload.single("image"), createFilm);
+router.post("/recommend", upload.single("image"), createFilm);
 
 //get single film
 router.get("/:id", getFilm);
