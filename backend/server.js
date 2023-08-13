@@ -13,7 +13,7 @@ app.use((req, res, next) => {
 
 // Allow requests from a specific origin (Vercel frontend)
 const corsOptions = {
-  origin: "https://film-gwjd.onrender.com/api/films",
+  origin: "https://filmfavesph.vercel.app/",
   optionsSuccessStatus: 200, // some legacy browsers (IE11, various SmartTVs) choke on 204
 };
 

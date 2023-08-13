@@ -77,7 +77,7 @@ const Recommend = () => {
 
     try {
       const response = await axios.post(
-        "https://film-gwjd.onrender.com/api/films",
+        `${import.meta.env.VITE_API_URL}`,
         formData,
         {
           headers: {
