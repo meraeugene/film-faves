@@ -1,4 +1,5 @@
 import { Link, useLocation } from "react-router-dom";
+import { Tooltip } from "@chakra-ui/react";
 
 const Navbar = () => {
   const location = useLocation();
@@ -14,20 +15,22 @@ const Navbar = () => {
       <div className="flex items-center gap-2">
         {isFilmsPage && (
           <Link to="/recommend">
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              fill="none"
-              viewBox="0 0 24 24"
-              strokeWidth={1.5}
-              stroke="currentColor"
-              className="h-6 w-6"
-            >
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                d="M12 4.5v15m7.5-7.5h-15"
-              />
-            </svg>
+            <Tooltip label="Recommend a Film" aria-label="A tooltip">
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                fill="none"
+                viewBox="0 0 24 24"
+                strokeWidth={1.5}
+                stroke="currentColor"
+                className="h-6 w-6"
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  d="M12 4.5v15m7.5-7.5h-15"
+                />
+              </svg>
+            </Tooltip>
           </Link>
         )}
         {!isLoginPage && (

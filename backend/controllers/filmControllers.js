@@ -6,7 +6,8 @@ const fs = require("fs");
 const getFilms = async (req, res) => {
   res.setHeader("Access-Control-Allow-Credentials", "true");
   try {
-    const films = await Film.find({}).sort({ likes: -1 });
+    // const films = await Film.find({}).sort({ likes: -1 });
+    const films = await Film.find({}).sort({ createdAt: -1 });
     res.status(200).json({ status: "ok", data: films });
   } catch (error) {
     res.status(500).json({ error: error.message });

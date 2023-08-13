@@ -2,7 +2,6 @@ import { useEffect, useState } from "react";
 import { Film } from "../types/Film";
 import LikeButton from "./LikeButton";
 import { Button } from "@chakra-ui/react";
-import CardSkeleton from "./CardSkeleton";
 
 interface CardProps {
   film: Film;
@@ -29,7 +28,7 @@ const Card = ({ film }: CardProps) => {
   }, [film.image]);
 
   if (!dataUrl) {
-    return <CardSkeleton cards={6} />;
+    return;
   }
 
   return (
@@ -50,7 +49,7 @@ const Card = ({ film }: CardProps) => {
           </h3>
           <span>{film.release_date}</span>
           <h3 className="   text-gray-400">Recommended by :</h3>
-          <span>Someone</span>
+          <span>User</span>
           <h3 className="mt-2 ">
             <span className="  capitalize text-gray-400 ">Genre: </span>
             <span className=" capitalize">{film.genre}</span>

@@ -11,6 +11,7 @@ import {
 import InputField from "../components/InputField";
 import { useFilmsContext } from "../hooks/useFilmsContext";
 import axios from "axios";
+import { useNavigate } from "react-router-dom";
 
 const Recommend = () => {
   const [image, setImage] = useState<File | null>(null);
@@ -26,6 +27,8 @@ const Recommend = () => {
   const [imgFilename, setImgFilename] = useState("");
 
   const { dispatch } = useFilmsContext();
+
+  const navigate = useNavigate();
 
   const submitImage = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -99,6 +102,9 @@ const Recommend = () => {
         setLoading(false);
         resetForm(); // Reset the form fields
         dispatch({ type: "CREATE_FILMS", payload: response.data });
+
+        // Redirect the user to /films route
+        navigate("/films");
       } else {
         console.log(response.data.error);
       }
@@ -252,7 +258,7 @@ const Recommend = () => {
             isRequired
             className="my-14"
           >
-            <FormLabel>Stream Link:</FormLabel>
+            <FormLabel>Where to Watch:</FormLabel>
             <Textarea
               rows={2}
               cols={0}
