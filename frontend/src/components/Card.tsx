@@ -55,7 +55,7 @@ const Card = ({ film }: CardProps) => {
             <span className=" capitalize">{film.genre}</span>
           </h3>
 
-          <Button className=" mb-2 mt-3 w-full  rounded-sm  text-white    ">
+          <Button className=" mb-2 mt-3 w-full  rounded-sm    ">
             <a
               href={film.link}
               target="_blank"
