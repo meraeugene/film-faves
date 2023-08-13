@@ -10,6 +10,7 @@ import {
 } from "@chakra-ui/react";
 import InputField from "../components/InputField";
 import { useFilmsContext } from "../hooks/useFilmsContext";
+import axios from "axios";
 
 const Recommend = () => {
   const [image, setImage] = useState<File | null>(null);
@@ -64,24 +65,28 @@ const Recommend = () => {
     } else {
       toast({
         title: "Film not uploaded.",
-        description: "Please upload a image for poster.",
+        description: "Please upload an image for the poster.",
         status: "error",
         duration: 5000,
         isClosable: true,
         position: "top",
       });
       setLoading(false);
+      return;
     }
 
     try {
-      const response = await fetch(`${import.meta.env.VITE_API_URL}`, {
-        method: "POST",
-        body: formData,
-      });
+      const response = await axios.post(
+        "https://film-gwjd.onrender.com/api/films",
+        formData,
+        {
+          headers: {
+            "Content-Type": "multipart/form-data",
+          },
+        },
+      );
 
-      const data = await response.json();
-
-      if (response.ok) {
+      if (response.status === 200) {
         toast({
           title: "Film created.",
           description: "Film recommendation submitted successfully!",
@@ -92,10 +97,9 @@ const Recommend = () => {
         });
         setLoading(false);
         resetForm(); // Reset the form fields
-        dispatch({ type: "CREATE_FILMS", payload: data });
+        dispatch({ type: "CREATE_FILMS", payload: response.data });
       } else {
-        const data = await response.json();
-        console.log(data.error);
+        console.log(response.data.error);
       }
     } catch (error) {
       toast({

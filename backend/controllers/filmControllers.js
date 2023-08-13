@@ -14,6 +14,7 @@ const getFilms = async (req, res) => {
 
 //create new film
 const createFilm = async (req, res) => {
+  res.setHeader("Access-Control-Allow-Credentials", "true");
   const { category, title, release_date, genre, description, link } = req.body;
 
   const requiredFields = [
