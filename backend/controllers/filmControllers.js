@@ -1,5 +1,6 @@
 const Film = require("../models/filmModel");
 const mongoose = require("mongoose");
+const fs = require("fs");
 
 //get all films
 const getFilms = async (req, res) => {
@@ -37,20 +38,25 @@ const createFilm = async (req, res) => {
     return res.status(400).json({ error: "Please upload an image" });
   }
 
-  try {
-    const film = await Film.create({
-      category,
-      title,
-      release_date,
-      genre,
-      description,
-      link,
-      image: req.file.filename,
-    });
-    res.status(200).json(film);
-  } catch (error) {
-    res.status(400).json({ error: error.message });
-  }
+  const film = new Film({
+    category,
+    title,
+    release_date,
+    genre,
+    description,
+    link,
+    image: {
+      data: fs.readFileSync("uploads/" + req.file.filename),
+      contentType: "image/png",
+    },
+  });
+
+  film
+    .save()
+    .then((res) => console.log("film is saved"))
+    .catch((err) => console.log(err, "erorr has occured"));
+
+  res.send("film is saved");
 };
 
 //get single film

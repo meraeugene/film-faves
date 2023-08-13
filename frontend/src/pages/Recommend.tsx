@@ -61,7 +61,7 @@ const Recommend = () => {
     }
 
     if (image) {
-      formData.append("image", image);
+      formData.append("testImage", image);
     } else {
       toast({
         title: "Film not uploaded.",
@@ -291,7 +291,7 @@ const Recommend = () => {
             <input
               type="file"
               accept="image/*"
-              name="image"
+              name="testImage"
               onChange={onInputChange}
               className="mt-3 w-full rounded bg-lightDark "
               onBlur={onBlur}

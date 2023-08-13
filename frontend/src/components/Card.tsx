@@ -1,3 +1,4 @@
+import { useEffect, useState } from "react";
 import { Film } from "../types/Film";
 import LikeButton from "./LikeButton";
 import { Button } from "@chakra-ui/react";
@@ -7,12 +8,31 @@ interface CardProps {
 }
 
 const Card = ({ film }: CardProps) => {
+  const [dataUrl, setDataUrl] = useState<string | null>(null);
+
+  useEffect(() => {
+    const imageArray = film.image.data.data;
+    const uint8Array = new Uint8Array(imageArray);
+    const blob = new Blob([uint8Array], { type: "image/jpeg" });
+
+    const reader = new FileReader();
+    reader.onload = () => {
+      const base64Image = reader.result as string;
+      setDataUrl(base64Image);
+    };
+    reader.readAsDataURL(blob);
+  }, [film.image.data.data]);
+
+  if (!dataUrl) {
+    return null; // or a loading state
+  }
+
   return (
     <div>
       <div className="card  flex gap-4 text-xs md:text-sm xl:text-lg ">
         <div className="card-image  w-1/2 md:w-full">
           <img
-            src={`/images/posters/${film.image}`}
+            src={dataUrl}
             alt={film.title}
             className="image rounded-sm "
             loading="lazy"

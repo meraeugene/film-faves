@@ -6,6 +6,6 @@ export type Film = {
   genre: string;
   description: string;
   link: string;
-  image: string;
+  image: any;
   likes: number;
 };

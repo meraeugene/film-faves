@@ -69,7 +69,7 @@ html {
 }
 
 form .input-box {
-  width: 100%;
+  width: calc(100% / 2 - 20px);
 }
 
 form .input-box label {

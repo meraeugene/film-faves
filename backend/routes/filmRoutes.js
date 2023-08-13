@@ -14,12 +14,12 @@ const {
 const multer = require("multer");
 
 const storage = multer.diskStorage({
-  destination: function (req, file, cb) {
-    cb(null, "../frontend/public/images/posters");
+  destination: (req, file, cb) => {
+    cb(null, "uploads");
   },
-  filename: function (req, file, cb) {
-    const uniqueSuffix = Date.now();
-    cb(null, uniqueSuffix + file.originalname);
+  filename: (req, file, cb) => {
+    // const uniqueSuffix = Date.now();
+    cb(null, file.originalname);
   },
 });
 
@@ -29,7 +29,7 @@ const upload = multer({ storage: storage });
 router.get("/", getFilms);
 
 //create films
-router.post("/recommend", upload.single("image"), createFilm);
+router.post("/recommend", upload.single("testImage"), createFilm);
 
 //get single film
 router.get("/:id", getFilm);
