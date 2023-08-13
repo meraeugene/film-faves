@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import axios from "axios";
 
 interface LikeButtonProps {
@@ -10,26 +10,16 @@ const LikeButton = ({ initialLikes, filmId }: LikeButtonProps) => {
   const [likes, setLikes] = useState(initialLikes);
   const [isLiked, setIsLiked] = useState(false);
 
-  useEffect(() => {
-    // Check local storage and update state
-    const likedStatus = localStorage.getItem(`liked_${filmId}`);
-    if (likedStatus === "true") {
-      setIsLiked(true);
-    }
-  }, [filmId]);
-
   const handleLike = async () => {
     try {
       if (isLiked) {
-        await axios.put(`${import.meta.env.VITE_API_URL}/${filmId}/unlike`);
         setLikes((prevLikes) => prevLikes - 1);
-        setIsLiked(false);
-        localStorage.setItem(`liked_${filmId}`, "false"); // Update local storage
+        setIsLiked(false); // Update state immediately
+        await axios.put(`${import.meta.env.VITE_API_URL}/${filmId}/unlike`);
       } else {
-        await axios.put(`${import.meta.env.VITE_API_URL}/${filmId}/like`);
         setLikes((prevLikes) => prevLikes + 1);
-        setIsLiked(true);
-        localStorage.setItem(`liked_${filmId}`, "true"); // Update local storage
+        setIsLiked(true); // Update state immediately
+        await axios.put(`${import.meta.env.VITE_API_URL}/${filmId}/like`);
       }
     } catch (err) {
       console.log(err);
@@ -38,7 +28,7 @@ const LikeButton = ({ initialLikes, filmId }: LikeButtonProps) => {
 
   return (
     <button
-      className="flex  items-center gap-[.3em] text-sm tracking-widest md:text-sm lg:text-base"
+      className="flex items-center gap-[.3em] text-sm tracking-widest md:text-sm lg:text-base"
       onClick={handleLike}
     >
       <svg
