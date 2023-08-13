@@ -11,6 +11,7 @@ const Films = () => {
 
   const fetchFilms = async () => {
     const result = await axios.get(`${import.meta.env.VITE_API_URL}`);
+    // const result = await axios.get("http://localhost:4000/api/films");
     const data = result.data.data;
     dispatch({ type: "SET_FILMS", payload: data });
   };
