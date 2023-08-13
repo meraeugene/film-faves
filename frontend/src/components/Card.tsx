@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { Film } from "../types/Film";
 import LikeButton from "./LikeButton";
 import { Button } from "@chakra-ui/react";
+import CardSkeleton from "./CardSkeleton";
 
 interface CardProps {
   film: Film;
@@ -28,7 +29,7 @@ const Card = ({ film }: CardProps) => {
   }, [film.image]);
 
   if (!dataUrl) {
-    return <div>Loading...</div>;
+    return <CardSkeleton cards={6} />;
   }
 
   return (

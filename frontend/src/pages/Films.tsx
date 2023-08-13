@@ -13,10 +13,9 @@ const Films = () => {
 
   const fetchFilms = async () => {
     const result = await axios.get(`${import.meta.env.VITE_API_URL}`);
-    // const result = await axios.get("http://localhost:4000/api/films");
     const data = result.data.data;
-    dispatch({ type: "SET_FILMS", payload: data });
     setIsLoading(false);
+    dispatch({ type: "SET_FILMS", payload: data });
   };
 
   useEffect(() => {
@@ -36,6 +35,7 @@ const Films = () => {
       return films.filter((film) => film.category === genre);
     }
   }, [genre, films]);
+
   return (
     <div className="films bg-dark  text-white">
       <h1 className="pb-4  text-center  font-researcher text-xl tracking-widest md:text-5xl lg:text-6xl xl:mx-auto xl:max-w-6xl">
@@ -54,10 +54,15 @@ const Films = () => {
         <option value="animation">Animation</option>
       </select>
       <div className="mt-12 grid grid-cols-1 gap-14 md:grid-cols-2 xl:grid-cols-3">
-        {isLoading && <CardSkeleton cards={6} />}
-        {filteredFilms.map((film) => (
-          <Card key={film._id} film={film} />
-        ))}
+        {isLoading
+          ? Array(6)
+              .fill(0)
+              .map((_, index) => (
+                <div className="flex flex-col" key={index}>
+                  <CardSkeleton cards={1} />
+                </div>
+              ))
+          : filteredFilms.map((film) => <Card key={film._id} film={film} />)}
       </div>
     </div>
   );
