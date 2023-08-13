@@ -2,18 +2,21 @@ import axios from "axios";
 import { useFilmsContext } from "../hooks/useFilmsContext";
 import { useEffect, useState, useMemo } from "react";
 import Card from "../components/Card";
+import CardSkeleton from "../components/CardSkeleton";
 
 const Films = () => {
   const {
     state: { films },
     dispatch,
   } = useFilmsContext();
+  const [isLoading, setIsLoading] = useState(true);
 
   const fetchFilms = async () => {
     const result = await axios.get(`${import.meta.env.VITE_API_URL}`);
     // const result = await axios.get("http://localhost:4000/api/films");
     const data = result.data.data;
     dispatch({ type: "SET_FILMS", payload: data });
+    setIsLoading(false);
   };
 
   useEffect(() => {
@@ -51,6 +54,7 @@ const Films = () => {
         <option value="animation">Animation</option>
       </select>
       <div className="mt-12 grid grid-cols-1 gap-14 md:grid-cols-2 xl:grid-cols-3">
+        {isLoading && <CardSkeleton cards={6} />}
         {filteredFilms.map((film) => (
           <Card key={film._id} film={film} />
         ))}

@@ -11,7 +11,11 @@ const Card = ({ film }: CardProps) => {
   const [dataUrl, setDataUrl] = useState<string | null>(null);
 
   useEffect(() => {
-    const imageArray = film.image.data.data;
+    const imageArray = film.image?.data?.data;
+    if (!imageArray) {
+      return;
+    }
+
     const uint8Array = new Uint8Array(imageArray);
     const blob = new Blob([uint8Array], { type: "image/jpeg" });
 
@@ -21,10 +25,10 @@ const Card = ({ film }: CardProps) => {
       setDataUrl(base64Image);
     };
     reader.readAsDataURL(blob);
-  }, [film.image.data.data]);
+  }, [film.image]);
 
   if (!dataUrl) {
-    return null; // or a loading state
+    return <div>Loading...</div>;
   }
 
   return (
