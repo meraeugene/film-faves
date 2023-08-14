@@ -3,8 +3,8 @@ import { Tooltip } from "@chakra-ui/react";
 
 const Navbar = () => {
   const location = useLocation();
-  const isFilmsPage = location.pathname === "/films";
   const isLoginPage = location.pathname === "/login";
+  const isFilmsPage = location.pathname.startsWith("/films");
 
   return (
     <div className="nav flex items-center justify-between">

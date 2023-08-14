@@ -3,31 +3,51 @@ import { useFilmsContext } from "../hooks/useFilmsContext";
 import { useEffect, useMemo, useState } from "react";
 import Card from "../components/Card";
 import CardSkeleton from "../components/CardSkeleton";
+import { useParams } from "react-router-dom";
+import Pagination from "../components/Pagination";
 
 const Films = () => {
+  const { pageNumber } = useParams();
+
+  const parsedPageNumber = Number(pageNumber) || 1;
+
   const {
     state: { films },
     dispatch,
   } = useFilmsContext();
+
   const [isLoading, setIsLoading] = useState(true);
 
-  const fetchFilms = async () => {
-    try {
-      const result = await axios.get(`${import.meta.env.VITE_API_URL}`);
-      const data = result.data.data;
-      setIsLoading(false);
-      console.log(result.data);
-      dispatch({ type: "SET_FILMS", payload: data });
-    } catch (error) {
-      console.error("Error fetching films:", error);
-      setIsLoading(false);
-    }
-  };
+  const [page, setPage] = useState(parsedPageNumber);
+  const [pages, setPages] = useState(1);
 
   useEffect(() => {
     window.scrollTo(0, 0);
+
+    const fetchFilms = async () => {
+      setIsLoading(true);
+      try {
+        // const result = await axios.get(
+        //   `http://localhost:4000/api/films?page=${page}`,
+        // );
+        const result = await axios.get(
+          `${import.meta.env.VITE_API_URL}/films?page=${page}`,
+        );
+
+        const { data, pages: totalPages } = result.data;
+        setPages(totalPages);
+
+        dispatch({ type: "SET_FILMS", payload: data });
+
+        setIsLoading(false);
+      } catch (error) {
+        console.error("Error fetching films:", error);
+        setIsLoading(false);
+      }
+    };
+
     fetchFilms();
-  }, []);
+  }, [page]);
 
   const [genre, setGenre] = useState("");
 
@@ -42,6 +62,8 @@ const Films = () => {
       return films.filter((film) => film.category === genre);
     }
   }, [genre, films]);
+
+  console.log(page);
 
   return (
     <div className="films bg-dark  text-white">
@@ -67,6 +89,7 @@ const Films = () => {
           filteredFilms.map((film) => <Card key={film._id} film={film} />)
         )}
       </div>
+      <Pagination page={page} pages={pages} changePage={setPage} />
     </div>
   );
 };
