@@ -3,10 +3,10 @@ import "react-loading-skeleton/dist/skeleton.css";
 import { useState, useEffect } from "react";
 
 interface CardSkeletonProps {
-  cards: number;
+  filmsPerPage: number;
 }
 
-const CardSkeleton = ({ cards }: CardSkeletonProps) => {
+const CardSkeleton = ({ filmsPerPage }: CardSkeletonProps) => {
   const [deviceSize, setDeviceSize] = useState("desktop");
 
   useEffect(() => {
@@ -31,7 +31,7 @@ const CardSkeleton = ({ cards }: CardSkeletonProps) => {
     };
   }, []);
 
-  return Array(cards)
+  return Array(filmsPerPage)
     .fill(0)
     .map((_, index) => (
       <div className="flex flex-col" key={index}>

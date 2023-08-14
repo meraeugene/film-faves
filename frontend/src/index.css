@@ -149,7 +149,9 @@ form button {
 #recommend-category option[value="live-action"],
 #category option[value="animation"],
 #recommend-category option[value="animation"],
-#category option[value=""] {
+#category option[value=""],
+#category option[value="latest"],
+#category option[value="popular"] {
   background-color: #2b2b37;
   color: #fff;
 }

@@ -32,7 +32,7 @@ const Films = ({ pageNumber }: FilmsProps) => {
         //   `http://localhost:4000/api/films?page=${page}`,
         // );
         const result = await axios.get(
-          `https://filmsfavesapi.onrender.com/api/films?page=${page}`,
+          `${import.meta.env.VITE_API_URL}?page=${page}`,
         );
 
         const { data, pages: totalPages } = result.data;
@@ -50,21 +50,25 @@ const Films = ({ pageNumber }: FilmsProps) => {
     fetchFilms();
   }, [page]);
 
-  const [genre, setGenre] = useState("");
+  const [option, setOption] = useState("");
 
-  const handleSelectGenre = (e: React.ChangeEvent<HTMLSelectElement>) => {
-    setGenre(e.target.value);
+  const handleSelectOption = (e: React.ChangeEvent<HTMLSelectElement>) => {
+    setOption(e.target.value);
   };
 
   const filteredFilms = useMemo(() => {
-    if (genre === "") {
-      return films;
-    } else {
-      return films.filter((film) => film.category === genre);
-    }
-  }, [genre, films]);
+    let sortedFilms = [...films];
 
-  console.log(page);
+    if (option === "latest") {
+      sortedFilms.sort((a, b) => b.release_date - a.release_date);
+    } else if (option === "popular") {
+      sortedFilms.sort((a, b) => b.likes - a.likes);
+    } else if (option !== "") {
+      sortedFilms = films.filter((film) => film.category === option);
+    }
+
+    return sortedFilms;
+  }, [option, films]);
 
   return (
     <div className="films bg-dark  text-white">
@@ -74,18 +78,20 @@ const Films = ({ pageNumber }: FilmsProps) => {
       <select
         className="w-full font-aquire lg:text-lg "
         id="category"
-        onChange={handleSelectGenre}
+        onChange={handleSelectOption}
       >
         <option value="" hidden>
           Select a category
         </option>
         <option value="">All</option>
+        <option value="latest">Latest</option>
+        <option value="popular">Most Popular</option>
         <option value="live-action">Live-action Movies</option>
         <option value="animation">Animation</option>
       </select>
       <div className="mt-12 grid grid-cols-1 gap-14 md:grid-cols-2 xl:grid-cols-3">
         {isLoading ? (
-          <CardSkeleton cards={6} />
+          <CardSkeleton filmsPerPage={9} />
         ) : (
           filteredFilms.map((film) => <Card key={film._id} film={film} />)
         )}
