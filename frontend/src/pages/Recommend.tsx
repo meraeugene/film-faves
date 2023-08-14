@@ -104,7 +104,7 @@ const Recommend = () => {
         dispatch({ type: "CREATE_FILMS", payload: response.data });
 
         // Redirect the user to /films route
-        navigate("/films/?page=1");
+        navigate("/films");
       } else {
         console.log(response.data.error);
       }
