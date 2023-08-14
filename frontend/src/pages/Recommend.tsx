@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import {
   FormControl,
   FormLabel,
@@ -29,6 +29,10 @@ const Recommend = () => {
   const { dispatch } = useFilmsContext();
 
   const navigate = useNavigate();
+
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
 
   const submitImage = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -69,6 +73,19 @@ const Recommend = () => {
       toast({
         title: "Film not uploaded.",
         description: "Please upload an image for the poster.",
+        status: "error",
+        duration: 5000,
+        isClosable: true,
+        position: "top",
+      });
+      setLoading(false);
+      return;
+    }
+
+    if (!isValidHttpUrl(link)) {
+      toast({
+        title: "Film not uploaded.",
+        description: "Please enter a valid URL for the stream link.",
         status: "error",
         duration: 5000,
         isClosable: true,
@@ -162,6 +179,19 @@ const Recommend = () => {
     setImgFilename("");
   };
 
+  const isValidHttpUrl = (str: string) => {
+    const pattern = new RegExp(
+      "^(https?:\\/\\/)?" + // protocol
+        "((([a-z\\d]([a-z\\d-]*[a-z\\d])*)\\.)+[a-z]{2,}|" + // domain name
+        "((\\d{1,3}\\.){3}\\d{1,3}))" + // OR ip (v4) address
+        "(\\:\\d+)?(\\/[-a-z\\d%_.~+]*)*" + // port and path
+        "(\\?[;&a-z\\d%_.~+=-]*)?" + // query string
+        "(\\#[-a-z\\d_]*)?$", // fragment locator
+      "i",
+    );
+    return pattern.test(str);
+  };
+
   return (
     <div className="recommend h-full bg-dark px-6 pb-12 pt-16 uppercase text-white">
       <h1 className="text-center font-researcher text-3xl md:text-4xl lg:text-5xl">
@@ -185,6 +215,7 @@ const Recommend = () => {
               value={category}
               onChange={handleCategoryChange}
               onBlur={onBlur}
+              className="cursor-pointer"
             >
               <option value="" hidden>
                 Select a category
@@ -237,7 +268,7 @@ const Recommend = () => {
             isInvalid={touched.description && !description}
             isRequired
           >
-            <FormLabel>Description:</FormLabel>
+            <FormLabel className="font-aquire">Description:</FormLabel>
             <Textarea
               rows={3}
               cols={0}
@@ -258,7 +289,7 @@ const Recommend = () => {
             isRequired
             className="my-14"
           >
-            <FormLabel>Where to Watch:</FormLabel>
+            <FormLabel className="font-aquire">Where to Watch:</FormLabel>
             <Textarea
               rows={2}
               cols={0}
@@ -299,7 +330,7 @@ const Recommend = () => {
               accept="image/*"
               name="testImage"
               onChange={onInputChange}
-              className="mt-3 w-full rounded bg-lightDark "
+              className="mt-3 w-full  rounded bg-lightDark "
               onBlur={onBlur}
               id="file"
             />
