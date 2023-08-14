@@ -181,10 +181,25 @@ form button {
   flex: 1;
 }
 
-.card-fade {
-  transition:
-    opacity 0.5s ease-in-out,
-    visibility 0.5s ease-in-out;
+.skeleton__img {
+  width: 112px;
+  height: 198px;
+}
+
+.skeleton__btn {
+  height: 45px;
+}
+
+.skeleton-heart__btn {
+  width: 30px;
+}
+
+.skeleton-year {
+  width: 50px;
+}
+
+.skeleton-recommended {
+  width: 110px;
 }
 
 /* media query */
@@ -231,5 +246,18 @@ form button {
 
   .nav {
     padding: 0.7em !important;
+  }
+
+  .skeleton__img {
+    width: 192px;
+    height: 300px;
+  }
+
+  .skeleton-heart__btn {
+    width: 50px;
+  }
+
+  .skeleton-recommended {
+    width: 150px;
   }
 }
