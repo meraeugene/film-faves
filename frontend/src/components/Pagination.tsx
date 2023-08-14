@@ -101,7 +101,7 @@ const Pagination = ({ page, pages, changePage }: PaginationProps) => {
 
   return (
     pages > 1 && (
-      <div className="flex flex-wrap items-center justify-center gap-4 pt-8">
+      <div className="flex flex-wrap items-center justify-center gap-2 pt-8 w-full">
         <Button
           onClick={() => handlePageChange(page - 1)}
           isDisabled={page === 1}
@@ -110,7 +110,7 @@ const Pagination = ({ page, pages, changePage }: PaginationProps) => {
           _hover={{ bg: page === 1 ? "" : "gray" }}
 className="font-aquire"
         >
-          Previous
+          Prev
         </Button>
 
         {middlePagination}
