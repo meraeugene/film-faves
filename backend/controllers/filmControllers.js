@@ -7,27 +7,9 @@ const fs = require("fs");
 const getFilms = async (req, res) => {
   res.setHeader("Access-Control-Allow-Credentials", "true");
   try {
-    const page = parseInt(req.query.page) || 1; // Get the requested page, default to 1 if not provided
-    const limit = parseInt(req.query.limit) || 10; // Get the requested limit, default to 10 if not provided
+    const films = await Film.find({}).sort({ createdAt: -1 });
 
-    // Calculate the skip value based on the requested page and limit
-    const skip = (page - 1) * limit;
-
-    // Query the database to get a page of films with the specified limit and skip values
-    const films = await Film.find({})
-      .sort({ createdAt: -1 })
-      .skip(skip)
-      .limit(limit);
-
-    // Get the total count of films for pagination
-    const totalFilms = await Film.countDocuments();
-
-    res.status(200).json({
-      status: "ok",
-      data: films,
-      currentPage: page,
-      totalPages: Math.ceil(totalFilms / limit),
-    });
+    res.status(200).json(films);
   } catch (error) {
     res.status(500).json({ error: error.message });
   }
