@@ -89,7 +89,7 @@ const Films = ({ pageNumber }: FilmsProps) => {
         <option value="live-action">Live-action Movies</option>
         <option value="animation">Animation</option>
       </select>
-      <div className="mt-12 grid grid-cols-1 gap-14 md:grid-cols-2 xl:grid-cols-3">
+      <div className="mt-12 grid grid-cols-1 gap-14 md:grid-cols-2 xl:grid-cols-3 ">
         {isLoading ? (
           <CardSkeleton filmsPerPage={9} />
         ) : (

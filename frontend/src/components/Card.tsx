@@ -33,13 +33,13 @@ const Card = ({ film }: CardProps) => {
   }
 
   return (
-    <div>
-      <div className="card  flex gap-4 text-xs md:text-sm xl:text-lg ">
+    <div className="card">
+      <div className="  flex gap-4 text-xs md:text-sm xl:text-lg ">
         <div className="card-image  w-1/2 md:w-full">
           <img
             src={dataUrl}
             alt={film.title}
-            className="image rounded-sm "
+            className="image rounded-lg "
             loading="lazy"
           />
         </div>

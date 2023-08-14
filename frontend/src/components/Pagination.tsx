@@ -101,7 +101,7 @@ const Pagination = ({ page, pages, changePage }: PaginationProps) => {
 
   return (
     pages > 1 && (
-      <div className="flex w-full flex-wrap items-center justify-center gap-2 pt-8">
+      <div className="flex w-full flex-wrap items-center justify-center gap-2 pt-8 md:pt-14 lg:pt-14">
         <Button
           onClick={() => handlePageChange(page - 1)}
           isDisabled={page === 1}
