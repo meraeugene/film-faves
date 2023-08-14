@@ -1,4 +1,4 @@
-import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { BrowserRouter, Routes, Route, useLocation } from "react-router-dom";
 import Navbar from "./components/Navbar";
 import Home from "./pages/Home";
 import Films from "./pages/Films";
@@ -14,7 +14,7 @@ function App() {
         <Navbar />
         <Routes>
           <Route path="/" element={<Home />}></Route>
-          <Route path="/films" element={<Films />}></Route>
+          <Route path="/films" element={<FilmsPage />}></Route>
           <Route path="/recommend" element={<Recommend />}></Route>
           <Route path="/signup" element={<Signup />}></Route>
           <Route path="/login" element={<Login />}></Route>
@@ -23,5 +23,13 @@ function App() {
     </SkeletonTheme>
   );
 }
+
+const FilmsPage = () => {
+  const location = useLocation();
+  const searchParams = new URLSearchParams(location.search);
+  const pageNumber = searchParams.get("page") || "1"; // Default to page 1
+
+  return <Films pageNumber={parseInt(pageNumber)} />;
+};
 
 export default App;

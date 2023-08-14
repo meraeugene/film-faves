@@ -15,7 +15,7 @@ const Home = () => {
 
         <div className="mt-6 flex flex-col items-center gap-4 font-aquire tracking-widest">
           <Link
-            to="/films"
+            to="/films?page=1"
             className="button flex items-center justify-center gap-2 text-lg"
           >
             <svg

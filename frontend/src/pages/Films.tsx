@@ -3,13 +3,14 @@ import { useFilmsContext } from "../hooks/useFilmsContext";
 import { useEffect, useMemo, useState } from "react";
 import Card from "../components/Card";
 import CardSkeleton from "../components/CardSkeleton";
-import { useParams } from "react-router-dom";
 import Pagination from "../components/Pagination";
 
-const Films = () => {
-  const { pageNumber } = useParams();
+interface FilmsProps {
+  pageNumber: number;
+}
 
-  const parsedPageNumber = Number(pageNumber) || 1;
+const Films = ({ pageNumber }: FilmsProps) => {
+  const parsedPageNumber = Number(pageNumber);
 
   const {
     state: { films },
@@ -31,7 +32,7 @@ const Films = () => {
         //   `http://localhost:4000/api/films?page=${page}`,
         // );
         const result = await axios.get(
-          `${import.meta.env.VITE_API_URL}?page=${page}`,
+          `https://filmsfavesapi.onrender.com/api/films?page=${page}`,
         );
 
         const { data, pages: totalPages } = result.data;

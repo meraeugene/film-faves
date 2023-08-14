@@ -1,4 +1,5 @@
 import { Button } from "@chakra-ui/react";
+import { useNavigate } from "react-router-dom";
 
 interface PaginationProps {
   page: number;
@@ -7,13 +8,20 @@ interface PaginationProps {
 }
 
 const Pagination = ({ page, pages, changePage }: PaginationProps) => {
+  const navigate = useNavigate();
+
+  const handlePageChange = (pageNumber: number) => {
+    navigate(`/films?page=${pageNumber}`); // Update the URL format here
+    changePage(pageNumber);
+  };
+
   let middlePagination;
 
   if (pages <= 5) {
     middlePagination = [...Array(pages)].map((_, index) => (
       <Button
         key={index + 1}
-        onClick={() => changePage(index + 1)}
+        onClick={() => handlePageChange(index + 1)}
         _hover={{ bg: page === index + 1 ? "" : "gray" }}
         variant={page === index + 1 ? "solid" : "outline"}
         color={page === index + 1 ? "black" : "white"}
@@ -30,14 +38,14 @@ const Pagination = ({ page, pages, changePage }: PaginationProps) => {
           <Button
             key={startValue + index + 1}
             isDisabled={page === startValue + index + 1}
-            onClick={() => changePage(startValue + index + 1)}
+            onClick={() => handlePageChange(startValue + index + 1)}
           >
             {startValue + index + 1}
           </Button>
         ))}
 
         <Button>...</Button>
-        <Button onClick={() => changePage(pages)}>{pages}</Button>
+        <Button onClick={() => handlePageChange(pages)}>{pages}</Button>
       </>
     );
 
@@ -45,30 +53,34 @@ const Pagination = ({ page, pages, changePage }: PaginationProps) => {
       if (pages - page >= 5) {
         middlePagination = (
           <>
-            <Button onClick={() => changePage(1)}>1</Button>
+            <Button onClick={() => handlePageChange(1)}>1</Button>
             <Button>....</Button>
-            <Button onClick={() => changePage(startValue)}>{startValue}</Button>
+            <Button onClick={() => handlePageChange(startValue)}>
+              {startValue}
+            </Button>
             {[...Array(5)].map((_, index) => (
               <Button
                 key={startValue + index + 1}
                 isDisabled={page === startValue + index + 1}
-                onClick={() => changePage(startValue + index + 1)}
+                onClick={() => handlePageChange(startValue + index + 1)}
               >
                 {startValue + index + 1}
               </Button>
             ))}
 
             <Button>...</Button>
-            <Button onClick={() => changePage(pages)}>{pages}</Button>
+            <Button onClick={() => handlePageChange(pages)}>{pages}</Button>
           </>
         );
       } else {
         let amountLeft = pages - page + 5;
         middlePagination = (
           <>
-            <Button onClick={() => changePage(1)}>1</Button>
+            <Button onClick={() => handlePageChange(1)}>1</Button>
             <Button>....</Button>
-            <Button onClick={() => changePage(startValue)}>{startValue}</Button>
+            <Button onClick={() => handlePageChange(startValue)}>
+              {startValue}
+            </Button>
             {[...Array(amountLeft)].map((_, index) => (
               <Button
                 key={startValue + index + 1}
@@ -76,7 +88,7 @@ const Pagination = ({ page, pages, changePage }: PaginationProps) => {
                   pages < startValue + index + 1 ? { display: "none" } : {}
                 }
                 isDisabled={page === startValue + index + 1}
-                onClick={() => changePage(startValue + index + 1)}
+                onClick={() => handlePageChange(startValue + index + 1)}
               >
                 {startValue + index + 1}
               </Button>
@@ -91,7 +103,7 @@ const Pagination = ({ page, pages, changePage }: PaginationProps) => {
     pages > 1 && (
       <div className="flex flex-wrap items-center justify-center gap-4 pt-12">
         <Button
-          onClick={() => changePage(page - 1)}
+          onClick={() => handlePageChange(page - 1)}
           isDisabled={page === 1}
           variant="outline"
           color="white"
@@ -116,7 +128,7 @@ const Pagination = ({ page, pages, changePage }: PaginationProps) => {
         {middlePagination}
 
         <Button
-          onClick={() => changePage(page + 1)}
+          onClick={() => handlePageChange(page + 1)}
           isDisabled={page === pages}
           variant="outline"
           color="white"
