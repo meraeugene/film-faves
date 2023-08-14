@@ -121,7 +121,7 @@ className="font-aquire"
           variant="outline"
           color="white"
           _hover={{ bg: page === pages ? "" : "gray" }}
-classNane="font-aquire"
+className="font-aquire"
         >
         Next
         </Button>
