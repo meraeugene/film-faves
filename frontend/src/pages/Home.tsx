@@ -36,7 +36,7 @@ const Home = () => {
 
         <div className="absolute bottom-5 text-center font-outfit">
           <p className="text-sm ">Film Faves Philippines</p>
-          <p className="text-xs">Developed by GTC</p>
+          <p className="text-xs">Developed by Andrew</p>
         </div>
       </div>
     </div>
