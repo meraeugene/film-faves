@@ -9,7 +9,10 @@ const getFilms = async (req, res) => {
   try {
     const films = await Film.find({}).sort({ createdAt: -1 });
 
-    res.status(200).json(films);
+    res.status(200).json({
+      status: "ok",
+      data: films,
+    });
   } catch (error) {
     res.status(500).json({ error: error.message });
   }
