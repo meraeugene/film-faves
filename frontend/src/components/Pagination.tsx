@@ -101,22 +101,14 @@ const Pagination = ({ page, pages, changePage }: PaginationProps) => {
 
   return (
     pages > 1 && (
-<<<<<<< HEAD
-      <div className="flex flex-wrap items-center justify-center gap-2 pt-10">
-=======
-      <div className="flex flex-wrap items-center justify-center gap-2 pt-8 w-full">
->>>>>>> 3d0af5b61443cfbeda32568bba7e0cd9b71ba6fb
+      <div className="flex w-full flex-wrap items-center justify-center gap-2 pt-8">
         <Button
           onClick={() => handlePageChange(page - 1)}
           isDisabled={page === 1}
           variant="outline"
           color="white"
           _hover={{ bg: page === 1 ? "" : "gray" }}
-<<<<<<< HEAD
           className="font-aquire"
-=======
-className="font-aquire"
->>>>>>> 3d0af5b61443cfbeda32568bba7e0cd9b71ba6fb
         >
           Prev
         </Button>
@@ -129,15 +121,9 @@ className="font-aquire"
           variant="outline"
           color="white"
           _hover={{ bg: page === pages ? "" : "gray" }}
-<<<<<<< HEAD
           className="font-aquire"
         >
           Next
-=======
-className="font-aquire"
-        >
-        Next
->>>>>>> 3d0af5b61443cfbeda32568bba7e0cd9b71ba6fb
         </Button>
       </div>
     )
