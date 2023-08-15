@@ -64,6 +64,12 @@ const Signup = () => {
           name="email"
           error="Email is required."
         />
+        <input
+          // ...other attributes
+          type="text"
+          style={{ display: "none" }} // Hide the dummy input field
+          autoComplete="off" // Disable autocomplete for the dummy input field
+        />
         <InputField
           onChange={(e) => setPassword(e.target.value)}
           onBlur={onBlur}
