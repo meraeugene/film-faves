@@ -38,7 +38,7 @@ html {
 }
 
 .nav {
-  padding: 0.5em 0.8em;
+  padding: 0.5em 1em;
   position: fixed;
   top: 0;
   width: 100%;
@@ -48,6 +48,33 @@ html {
   -webkit-backdrop-filter: blur(14.3px);
   background: rgba(0, 0, 0, 0.36);
   box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+}
+
+.profile-menu {
+  position: absolute;
+  top: 40px;
+  border-radius: 4px;
+  background-color: #010101;
+  padding: 0.5em 0.7em;
+  font-family: Aquire;
+  right: 5px;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5em;
+}
+
+.nav-menu {
+  display: flex;
+  align-items: center;
+  gap: 0.5em;
+}
+
+.button {
+  background-color: #fff;
+  color: black;
+  padding: 4px 16px;
+  border-radius: 4px;
+  font-family: Aquire;
 }
 
 .image {
@@ -205,17 +232,25 @@ form button {
 /* media query */
 @media screen and (min-width: 320px) {
   .films {
-    padding: 4em 2em 2em 2em;
+    padding: 5em 2em 2em 2em;
   }
 
   .skeleton {
     height: 50px;
+  }
+
+  .nav-menu {
+    display: none;
   }
 }
 
 @media screen and (min-width: 375px) {
   .films {
     padding: 4em 2em 2em 2em;
+  }
+
+  .nav-menu {
+    display: none;
   }
 }
 
@@ -225,15 +260,27 @@ form button {
     padding: 4em;
     padding-top: 5em;
   }
+
+  .nav-menu {
+    display: none;
+  }
 }
 
 @media screen and (min-width: 1024px) {
+  .profile-menu {
+    display: none;
+  }
+
+  .nav-menu {
+    display: flex;
+  }
+
   .image {
     width: 210px;
   }
 
   .nav {
-    padding: 0.7em !important;
+    padding: 0.7em 2.5em !important;
   }
 
   .skeleton__img {

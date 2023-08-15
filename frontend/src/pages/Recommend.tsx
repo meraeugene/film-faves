@@ -13,6 +13,8 @@ import { useFilmsContext } from "../hooks/useFilmsContext";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 
+import { useAuthContext } from "../hooks/useAuthContext";
+
 const Recommend = () => {
   const [image, setImage] = useState<File | null>(null);
   const [category, setCategory] = useState("");
@@ -25,6 +27,8 @@ const Recommend = () => {
   const [touched, setTouched] = useState<Record<string, boolean>>({});
   const [loading, setLoading] = useState(false);
   const [imgFilename, setImgFilename] = useState("");
+
+  const { user } = useAuthContext();
 
   const { dispatch } = useFilmsContext();
 
@@ -46,6 +50,10 @@ const Recommend = () => {
     formData.append("genre", genre);
     formData.append("description", description);
     formData.append("link", link);
+
+    if (user && user.username) {
+      formData.append("username", user.username); // Attach username here
+    }
 
     if (
       !category ||
@@ -103,14 +111,13 @@ const Recommend = () => {
         {
           headers: {
             "Content-Type": "multipart/form-data",
+            Authorization: `Bearer ${user?.token}`,
           },
         },
       );
 
       if (response.status === 200) {
         const recommendedFilm = response.data.data;
-
-        console.log("Recommended Film:", recommendedFilm);
 
         toast({
           title: "Film created.",

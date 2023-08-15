@@ -75,13 +75,14 @@ const Signup = () => {
         />
 
         <Button
-          loadingText="Uploading..."
+          loadingText="Creating Account..."
           spinnerPlacement="start"
           type="submit"
           colorScheme="isLoading"
           variant="outline"
           className="mt-2"
           isDisabled={isLoading}
+          isLoading={isLoading}
         >
           Sign Up
         </Button>

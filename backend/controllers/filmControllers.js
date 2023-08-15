@@ -45,7 +45,8 @@ const getFilms = async (req, res) => {
 
 //create new film
 const createFilm = async (req, res) => {
-  const { category, title, release_date, genre, description, link } = req.body;
+  const { category, title, release_date, genre, description, link, username } =
+    req.body;
 
   const requiredFields = [
     "category",
@@ -54,6 +55,7 @@ const createFilm = async (req, res) => {
     "genre",
     "description",
     "link",
+    "username",
   ];
 
   const emptyFields = requiredFields.filter((field) => !req.body[field]);
@@ -68,6 +70,9 @@ const createFilm = async (req, res) => {
     return res.status(400).json({ error: "Please upload an image" });
   }
 
+  // Log the data from req.body
+  console.log("Request Body Data:", req.body);
+
   const film = new Film({
     category,
     title,
@@ -79,12 +84,13 @@ const createFilm = async (req, res) => {
       data: fs.readFileSync("uploads/" + req.file.filename),
       contentType: "image/png",
     },
+    recommendedBy: username,
   });
 
   film
     .save()
     .then((res) => console.log("film is saved"))
-    .catch((err) => console.log(err, "erorr has occured"));
+    .catch((err) => console.log(err, "error has occurred"));
 
   res.send("film is saved");
 };
