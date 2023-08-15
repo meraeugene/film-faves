@@ -83,7 +83,7 @@ const Films = ({ pageNumber }: FilmsProps) => {
         <option value="" hidden>
           Select a category
         </option>
-        {/* <option value="">All</option> */}
+        <option value="">All</option>
         <option value="latest">Latest</option>
         <option value="popular">Most Popular</option>
         <option value="live-action">Live-action Movies</option>
