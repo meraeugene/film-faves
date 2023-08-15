@@ -81,8 +81,8 @@ const Signup = () => {
           colorScheme="isLoading"
           variant="outline"
           className="mt-2"
-          isDisabled={isLoading}
           isLoading={isLoading}
+          isDisabled={isLoading}
         >
           Sign Up
         </Button>

@@ -62,13 +62,14 @@ const Login = () => {
         />
 
         <Button
-          loadingText="Uploading..."
+          loadingText="Logging in..."
           spinnerPlacement="start"
           type="submit"
           colorScheme="isLoading"
           variant="outline"
           className="mt-4"
           isDisabled={isLoading}
+          isLoading={isLoading}
         >
           Log In
         </Button>
