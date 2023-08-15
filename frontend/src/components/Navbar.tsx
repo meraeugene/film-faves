@@ -41,7 +41,18 @@ const Navbar = () => {
     </Link>
   ) : (
     <Tooltip label="Recommend a Film" aria-label="A tooltip">
-      <Button>
+      <Button
+        onClick={() =>
+          toast({
+            title: "Authentication Required",
+            description: "Please login to recommend a film.",
+            status: "error",
+            duration: 2500,
+            isClosable: true,
+            position: "top",
+          })
+        }
+      >
         <svg
           xmlns="http://www.w3.org/2000/svg"
           fill="none"
@@ -49,16 +60,6 @@ const Navbar = () => {
           strokeWidth={1.5}
           stroke="currentColor"
           className="h-6 w-6 cursor-pointer"
-          onClick={() =>
-            toast({
-              title: "Authentication Required",
-              description: "Please login to recommend a film.",
-              status: "error",
-              duration: 2500,
-              isClosable: true,
-              position: "top",
-            })
-          }
         >
           <path
             strokeLinecap="round"
