@@ -30,7 +30,6 @@ const Signup = () => {
         title: "Sign-Up Error",
         description: error,
         status: "error",
-        duration: 4500,
         isClosable: true,
         position: "top",
       });
