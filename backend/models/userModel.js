@@ -33,8 +33,13 @@ userSchema.statics.signup = async function (username, email, password) {
   }
   if (!validator.isStrongPassword(password)) {
     throw Error(
-      "Please choose a more secure password. It should be longer than 6 characters, unique to you, and difficult for others to guess."
+      "Please choose a more secure password. It should be at least 6 characters long and include a combination of uppercase and lowercase letters, numbers, and special characters."
     );
+  }
+
+  // Check for spaces in the username
+  if (username.includes(" ")) {
+    throw Error("Username cannot contain spaces.");
   }
 
   const existingUsername = await this.findOne({ username });

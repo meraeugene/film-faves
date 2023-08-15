@@ -39,7 +39,7 @@ const Card = ({ film }: CardProps) => {
           <img
             src={dataUrl}
             alt={film.title}
-            className="image rounded-lg "
+            className="image rounded-md "
             loading="lazy"
           />
         </div>
