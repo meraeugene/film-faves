@@ -31,7 +31,7 @@ html {
 }
 
 .bg {
-  background: url(/images/hero/footer-bg.jpg);
+  /* background: url(/images/hero/footer-bg.jpg); */
   background-position: center;
   background-size: cover;
   min-height: 100vh;
