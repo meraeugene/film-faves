@@ -8,4 +8,12 @@ export type Film = {
   link: string;
   image: any;
   likes: number;
+  recommendedBy: string;
+};
+
+export type User = {
+  username: string;
+  email: string;
+  password: string;
+  token: string;
 };

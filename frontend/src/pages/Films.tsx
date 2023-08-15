@@ -39,7 +39,6 @@ const Films = ({ pageNumber }: FilmsProps) => {
         setPages(totalPages);
 
         dispatch({ type: "SET_FILMS", payload: data });
-
         setIsLoading(false);
       } catch (error) {
         console.error("Error fetching films:", error);

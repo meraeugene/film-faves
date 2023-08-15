@@ -16,8 +16,8 @@ function App() {
           <Route path="/" element={<Home />}></Route>
           <Route path="/films" element={<FilmsPage />}></Route>
           <Route path="/recommend" element={<Recommend />}></Route>
-          <Route path="/signup" element={<Signup />}></Route>
-          <Route path="/login" element={<Login />}></Route>
+          <Route path="/auth/signup" element={<Signup />}></Route>
+          <Route path="/auth/login" element={<Login />}></Route>
         </Routes>
       </BrowserRouter>
     </SkeletonTheme>

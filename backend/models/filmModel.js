@@ -35,6 +35,10 @@ const filmSchema = new Schema(
       type: Number,
       default: 0,
     },
+    recommendedBy: {
+      type: String,
+      required: true,
+    },
   },
   { timestamps: true }
 );
