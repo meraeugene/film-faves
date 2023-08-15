@@ -44,7 +44,6 @@ const Login = () => {
           onBlur={onBlur}
           title="Username"
           type="text"
-          placeholder="andrew"
           isInvalid={touched.username && !username}
           value={username}
           name="username"

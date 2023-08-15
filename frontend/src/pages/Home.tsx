@@ -4,14 +4,18 @@ const Home = () => {
   return (
     <div className="bg">
       <div className="flex h-screen flex-col items-center justify-center gap-2 text-white">
-        <h1 className="text-center font-researcher text-6xl tracking-wider md:text-8xl">
+        <h1 className="text-center font-researcher text-6xl leading-none tracking-wider  lg:text-7xl xl:text-8xl">
           Film
         </h1>
-        <h1 className="text-center font-researcher text-6xl tracking-wider md:text-8xl">
+        <h1 className="text-center font-researcher text-6xl leading-none tracking-wider  lg:text-7xl xl:text-8xl">
           Faves
         </h1>
-        <h2 className="w-9/12 text-center font-outfit  text-2xl">
-          Uncover Your Next Film Gem
+        <h2 className="subheader w-9/12 text-center  font-outfit text-2xl leading-none">
+          Uncover Your Next
+        </h2>
+
+        <h2 className="subheader w-9/12 text-center  font-outfit text-2xl leading-none">
+          Film Gem
         </h2>
 
         <div className="mt-6 flex flex-col items-center gap-4 font-aquire tracking-widest">

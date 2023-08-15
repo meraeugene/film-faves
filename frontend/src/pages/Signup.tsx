@@ -46,7 +46,6 @@ const Signup = () => {
           onBlur={onBlur}
           title="Username"
           type="text"
-          placeholder="(e.g. ivory)"
           isInvalid={touched.username && !username}
           value={username}
           name="username"
@@ -57,7 +56,6 @@ const Signup = () => {
           onBlur={onBlur}
           title="Email"
           type="email"
-          placeholder="(e.g. ivory@email.com)"
           isInvalid={touched.email && !email}
           value={email}
           name="email"

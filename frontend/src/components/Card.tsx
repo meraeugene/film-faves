@@ -33,7 +33,7 @@ const Card = ({ film }: CardProps) => {
   }
 
   return (
-    <div className="card">
+    <div className="card ">
       <div className="  flex gap-4 text-xs md:text-sm xl:text-lg ">
         <div className="card-image  w-1/2 md:w-full">
           <img
