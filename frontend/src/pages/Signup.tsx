@@ -20,6 +20,9 @@ const Signup = () => {
     e.preventDefault();
 
     await signup({ username, email, password });
+
+    // Clear the password input after signup attempt, regardless of success or failure
+    setPassword("");
   };
 
   // useeffect because error is not available yet

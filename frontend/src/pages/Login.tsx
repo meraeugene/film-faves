@@ -20,6 +20,9 @@ const Login = () => {
     e.preventDefault();
 
     await login({ username, password });
+
+    // Clear the password input after signup attempt, regardless of success or failure
+    setPassword("");
   };
 
   useEffect(() => {

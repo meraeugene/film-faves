@@ -38,7 +38,7 @@ const InputField = ({
         onBlur={onBlur}
         value={value}
         name={name}
-        autoComplete="off"
+        autoComplete="new-password"
       />
       <FormErrorMessage className="font-outfit tracking-wider">
         {error}
