@@ -36,7 +36,7 @@ export const useSignup = () => {
       const data = response.data;
 
       if (response.status === 200) {
-        navigate("/");
+        navigate("/films?page=1");
         localStorage.setItem("user", JSON.stringify(data));
         dispatch({ type: "LOGIN", payload: data });
       }
