@@ -243,7 +243,6 @@ const Recommend = () => {
           <InputField
             title="Title"
             type="text"
-            placeholder="(e.g. Insidious: The Red Door)"
             isInvalid={touched.title && !title}
             onChange={(e) => setTitle(e.target.value)}
             onBlur={onBlur}
@@ -255,7 +254,6 @@ const Recommend = () => {
           <InputField
             title="Year"
             type="number"
-            placeholder="(e.g. 2023)"
             isInvalid={touched.release_date && !releaseDate}
             onChange={(e) => setReleaseDate(e.target.value)}
             onBlur={onBlur}
@@ -267,7 +265,6 @@ const Recommend = () => {
           <InputField
             title="Genre"
             type="text"
-            placeholder="(e.g. Horror)"
             isInvalid={touched.genre && !genre}
             onChange={(e) => setGenre(e.target.value)}
             onBlur={onBlur}
@@ -280,11 +277,10 @@ const Recommend = () => {
             isInvalid={touched.description && !description}
             isRequired
           >
-            <FormLabel className="font-aquire">Description:</FormLabel>
+            <FormLabel className="font-aquire">Review:</FormLabel>
             <Textarea
               rows={3}
               cols={0}
-              placeholder="(e.g. Lambert's school drop-off turns chilling as demons resurface.)"
               onChange={handleDescriptionLimit}
               value={description}
               name="description"
@@ -305,7 +301,6 @@ const Recommend = () => {
             <Textarea
               rows={2}
               cols={0}
-              placeholder="(e.g. https://sflix.to/movie/free-insidious-the-red-door-hd-98131)"
               onChange={(e) => setLink(e.target.value)}
               value={link}
               name="link"

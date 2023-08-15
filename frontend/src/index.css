@@ -31,7 +31,7 @@ html {
 }
 
 .bg {
-  background: url(/images/hero/bg.png);
+  background: url(/images/hero/footer-bg.jpg);
   background-position: center;
   background-size: cover;
   min-height: 100vh;
@@ -86,8 +86,6 @@ html {
 .card-info {
   min-height: 140px;
 }
-
-/*  */
 
 .form {
   max-width: 400px;
