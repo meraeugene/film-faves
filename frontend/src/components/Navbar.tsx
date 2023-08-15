@@ -98,11 +98,9 @@ const Navbar = () => {
         )}
 
         {!isLoginPage && !user && (
-          <Button>
-            <Link to="/auth/login" className="font-aquire">
-              Login
-            </Link>
-          </Button>
+          <Link to="/auth/login" className="font-aquire ">
+            <Button>Login</Button>
+          </Link>
         )}
 
         {user && <span className="font-outfit">{user.username}</span>}

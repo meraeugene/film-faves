@@ -12,7 +12,6 @@ import InputField from "../components/InputField";
 import { useFilmsContext } from "../hooks/useFilmsContext";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
-import { useAuthContext } from "../hooks/useAuthContext";
 
 const Recommend = () => {
   const [image, setImage] = useState<File | null>(null);
@@ -27,8 +26,6 @@ const Recommend = () => {
   const [loading, setLoading] = useState(false);
   const [imgFilename, setImgFilename] = useState("");
 
-  const { user } = useAuthContext();
-
   const { dispatch } = useFilmsContext();
 
   const navigate = useNavigate();
@@ -39,18 +36,6 @@ const Recommend = () => {
 
   const submitImage = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-
-    if (!user) {
-      toast({
-        title: "Authentication Required",
-        description: "Please login to recommend a film.",
-        status: "error",
-        duration: 2500,
-        isClosable: true,
-        position: "top",
-      });
-      return;
-    }
 
     setLoading(true);
 
@@ -118,13 +103,12 @@ const Recommend = () => {
         {
           headers: {
             "Content-Type": "multipart/form-data",
-            Authorization: `Bearer ${user.token}`,
           },
         },
       );
 
-      if (response.status === 201) {
-        const recommendedFilm = response.data;
+      if (response.status === 200) {
+        const recommendedFilm = response.data.data;
 
         console.log("Recommended Film:", recommendedFilm);
 

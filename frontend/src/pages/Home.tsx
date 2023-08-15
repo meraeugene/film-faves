@@ -15,11 +15,8 @@ const Home = () => {
         </h2>
 
         <div className="mt-6 flex flex-col items-center gap-4 font-aquire tracking-widest">
-          <Button>
-            <Link
-              to="/films?page=1"
-              className="flex items-center justify-center gap-2 text-lg"
-            >
+          <Link to="/films?page=1" className="">
+            <Button className="flex items-center justify-center gap-2 text-lg">
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 viewBox="0 0 24 24"
@@ -33,8 +30,8 @@ const Home = () => {
                 />
               </svg>
               Explore
-            </Link>
-          </Button>
+            </Button>
+          </Link>
         </div>
 
         <div className="absolute bottom-5 text-center font-outfit">

@@ -75,20 +75,18 @@ const createFilm = async (req, res) => {
     genre,
     description,
     link,
-    recommendedBy, // Store the username
     image: {
       data: fs.readFileSync("uploads/" + req.file.filename),
       contentType: "image/png",
     },
   });
 
-  try {
-    const savedFilm = await film.save();
-    res.status(201).json(savedFilm);
-  } catch (error) {
-    console.error(error);
-    res.status(500).json({ error: "An error occurred while saving the film" });
-  }
+  film
+    .save()
+    .then((res) => console.log("film is saved"))
+    .catch((err) => console.log(err, "erorr has occured"));
+
+  res.send("film is saved");
 };
 
 //get single film
