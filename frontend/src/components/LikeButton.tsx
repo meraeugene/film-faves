@@ -15,11 +15,13 @@ const LikeButton = ({ initialLikes, filmId }: LikeButtonProps) => {
       if (isLiked) {
         setLikes((prevLikes) => prevLikes - 1);
         setIsLiked(false); // Update state immediately
-        await axios.put(`${import.meta.env.VITE_API_URL}/${filmId}/unlike`);
+        await axios.put(
+          `${import.meta.env.VITE_API_URL}/films/${filmId}/unlike`,
+        );
       } else {
         setLikes((prevLikes) => prevLikes + 1);
         setIsLiked(true); // Update state immediately
-        await axios.put(`${import.meta.env.VITE_API_URL}/${filmId}/like`);
+        await axios.put(`${import.meta.env.VITE_API_URL}/films/${filmId}/like`);
       }
     } catch (err) {
       console.log(err);

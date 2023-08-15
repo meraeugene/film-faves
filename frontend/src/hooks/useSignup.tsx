@@ -28,7 +28,7 @@ export const useSignup = () => {
 
     try {
       const response = await axios.post(
-        "http://localhost:4000/api/user/signup",
+        `${import.meta.env.VITE_API_URL}/user/signup`,
         { username, email, password },
         { headers },
       );
