@@ -1,22 +1,35 @@
 import { Film } from "../types/Film";
 import LikeButton from "./LikeButton";
 import { Button } from "@chakra-ui/react";
+import { AdvancedImage, placeholder, lazyload } from "@cloudinary/react";
+import { Cloudinary } from "@cloudinary/url-gen";
 
 interface CardProps {
   film: Film;
 }
 
 const Card = ({ film }: CardProps) => {
+  // Extract image ID from the URL
+  const [imageId] = film.image.match(/v(\d+)\/(.+)/);
+
+  // Create a new Cloudinary instance
+  const cld = new Cloudinary({
+    cloud: {
+      cloudName: "dupynxkci", // Replace with your actual cloud name
+    },
+  });
+
+  // Construct Cloudinary URL using Transformation
+  const imageUrl = cld.image(imageId).quality("auto");
+
   return (
     <div className="card ">
       <div className="  flex gap-4 text-xs md:text-sm xl:text-lg ">
         <div className="card-image  w-1/2 md:w-full">
-          <img
-            src={film.image}
-            // src={`https://filmfaves.vercel.app/${film.image}`}
-            alt={film.title}
+          <AdvancedImage
+            cldImg={imageUrl}
             className="image rounded-md "
-            loading="lazy"
+            plugins={[lazyload(), placeholder({ mode: "blur" })]}
           />
         </div>
         <div className="card-info flex  w-1/2   flex-col items-start gap-1 font-outfit lg:w-full">
