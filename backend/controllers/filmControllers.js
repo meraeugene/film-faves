@@ -1,6 +1,5 @@
 const Film = require("../models/filmModel");
 const mongoose = require("mongoose");
-const fs = require("fs");
 
 //get all films
 
@@ -70,7 +69,8 @@ const createFilm = async (req, res) => {
     return res.status(400).json({ error: "Please upload an image" });
   }
 
-  const image = req.file.path;
+  // Log the data from req.body
+  console.log("Request Body Data:", req.body);
 
   const film = new Film({
     category,
@@ -79,7 +79,7 @@ const createFilm = async (req, res) => {
     genre,
     description,
     link,
-    image: image,
+    image: req.file.filename,
     recommendedBy: username,
   });
 

@@ -12,8 +12,8 @@ const Card = ({ film }: CardProps) => {
       <div className="  flex gap-4 text-xs md:text-sm xl:text-lg ">
         <div className="card-image  w-1/2 md:w-full">
           <img
-            // src={`http://localhost:4000/${film.image}`}
-            src={`https://filmsfavesapi.onrender.com/api/films?page=1/${film.image}`}
+            // src={`http://localhost:4000/uploads/${film.image}`}
+            src={`https://filmsfavesapi.onrender.com/api/films?page=1/uploads/${film.image}`}
             alt={film.title}
             className="image rounded-md "
             loading="lazy"
