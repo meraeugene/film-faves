@@ -12,24 +12,13 @@ const {
 
 // multer for image upload
 const multer = require("multer");
-
-const storage = multer.diskStorage({
-  destination: (req, file, cb) => {
-    cb(null, "uploads");
-  },
-  filename: (req, file, cb) => {
-    // const uniqueSuffix = Date.now();
-    cb(null, file.originalname);
-  },
-});
-
-const upload = multer({ storage: storage });
+const upload = multer({ dest: "uploads/" });
 
 //get single films
 router.get("/", getFilms);
 
 //create films
-router.post("/recommend", upload.single("testImage"), createFilm);
+router.post("/recommend", upload.single("image"), createFilm);
 
 //get single film
 router.get("/:id", getFilm);

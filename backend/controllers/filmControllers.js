@@ -70,8 +70,7 @@ const createFilm = async (req, res) => {
     return res.status(400).json({ error: "Please upload an image" });
   }
 
-  // Log the data from req.body
-  console.log("Request Body Data:", req.body);
+  const image = req.file.path;
 
   const film = new Film({
     category,
@@ -80,10 +79,7 @@ const createFilm = async (req, res) => {
     genre,
     description,
     link,
-    image: {
-      data: fs.readFileSync("uploads/" + req.file.filename),
-      contentType: "image/png",
-    },
+    image: image,
     recommendedBy: username,
   });
 

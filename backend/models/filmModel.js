@@ -28,8 +28,8 @@ const filmSchema = new Schema(
       required: true,
     },
     image: {
-      data: Buffer,
-      contentType: String,
+      type: String,
+      required: true,
     },
     likes: {
       type: Number,

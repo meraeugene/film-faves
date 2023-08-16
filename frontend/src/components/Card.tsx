@@ -1,43 +1,19 @@
-import { useEffect, useState } from "react";
 import { Film } from "../types/Film";
 import LikeButton from "./LikeButton";
 import { Button } from "@chakra-ui/react";
-import CardSkeleton from "./CardSkeleton";
 
 interface CardProps {
   film: Film;
 }
 
 const Card = ({ film }: CardProps) => {
-  const [dataUrl, setDataUrl] = useState<string | null>(null);
-
-  useEffect(() => {
-    const imageArray = film.image?.data?.data;
-    if (!imageArray) {
-      return;
-    }
-
-    const uint8Array = new Uint8Array(imageArray);
-    const blob = new Blob([uint8Array], { type: "image/jpeg" });
-
-    const reader = new FileReader();
-    reader.onload = () => {
-      const base64Image = reader.result as string;
-      setDataUrl(base64Image);
-    };
-    reader.readAsDataURL(blob);
-  }, [film.image]);
-
-  if (!dataUrl) {
-    return <CardSkeleton filmsPerPage={9} />;
-  }
-
   return (
     <div className="card ">
       <div className="  flex gap-4 text-xs md:text-sm xl:text-lg ">
         <div className="card-image  w-1/2 md:w-full">
           <img
-            src={dataUrl}
+            // src={`http://localhost:4000/${film.image}`}
+            src={`https://filmsfavesapi.onrender.com/api/films/${film.image}`}
             alt={film.title}
             className="image rounded-md "
             loading="lazy"
