@@ -4,6 +4,7 @@ const app = express();
 const mongoose = require("mongoose");
 const cors = require("cors");
 const path = require("path");
+const fetch = require("node-fetch"); // Import the node-fetch library
 
 const filmRoutes = require("./routes/filmRoutes");
 const userRoutes = require("./routes/userRoutes");
@@ -30,6 +31,19 @@ app.use("/uploads", express.static(path.join(__dirname, "uploads")));
 //routes
 app.use("/api/films", filmRoutes);
 app.use("/api/user", userRoutes);
+
+// Proxy route
+app.get("/api/proxy", async (req, res) => {
+  try {
+    const remoteUrl = "https://filmsfavesapi.onrender.com/api/films?page=1"; // Update with the correct remote API URL
+    const response = await fetch(remoteUrl);
+    const data = await response.json();
+    res.json(data);
+  } catch (error) {
+    console.error("Error fetching data:", error);
+    res.status(500).json({ error: "An error occurred while fetching data" });
+  }
+});
 
 //connect to mongodb
 mongoose
