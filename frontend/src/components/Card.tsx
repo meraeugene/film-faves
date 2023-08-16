@@ -13,7 +13,7 @@ const Card = ({ film }: CardProps) => {
         <div className="card-image  w-1/2 md:w-full">
           <img
             // src={`http://localhost:4000/${film.image}`}
-            src={`${import.meta.env.VITE_API_URL}/films/${film.image}`}
+            src={`https://filmfaves.vercel.app/${film.image}`}
             alt={film.title}
             className="image rounded-md "
             loading="lazy"
