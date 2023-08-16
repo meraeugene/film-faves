@@ -32,7 +32,7 @@ const Films = ({ pageNumber }: FilmsProps) => {
         //   `http://localhost:4000/api/films?page=${page}`,
         // );
         const result = await axios.get(
-          `${import.meta.env.VITE_API_URL}/films?page=${page}`,
+          `${import.meta.env.VITE_API_URL}/?page=${page}`,
         );
 
         const { data, pages: totalPages } = result.data;
