@@ -14,15 +14,7 @@ app.use((req, res, next) => {
 });
 
 // Enable CORS for all routes
-app.use(
-  cors({
-    allowedHeaders: ["sessionId", "Content-Type"],
-    exposedHeaders: ["sessionId"],
-    origin: "*",
-    methods: "GET,HEAD,PUT,PATCH,POST,DELETE",
-    preflightContinue: false,
-  })
-);
+app.use(cors());
 
 //to get the req.body
 app.use(express.json());
