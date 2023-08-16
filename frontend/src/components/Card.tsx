@@ -13,7 +13,7 @@ const Card = ({ film }: CardProps) => {
         <div className="card-image  w-1/2 md:w-full">
           <img
             // src={`http://localhost:4000/uploads/${film.image}`}
-            src={`https://filmsfavesapi.onrender.com/api/films/uploads/${film.image}`}
+            src={`https://filmsfavesapi.onrender.com/api/films?page=1/uploads/${film.image}`}
             alt={film.title}
             className="image rounded-md "
             loading="lazy"
