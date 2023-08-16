@@ -19,7 +19,11 @@ app.use(cors());
 //to get the req.body
 app.use(express.json());
 
-app.use("/uploads", express.static("uploads"));
+app.use("/uploads", express.static("uploads"), {
+  setHeaders: (res, path, stat) => {
+    res.set("Content-Type", "image/jpeg");
+  },
+});
 
 //routes
 app.use("/api/films", filmRoutes);
