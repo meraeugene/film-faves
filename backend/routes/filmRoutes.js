@@ -10,15 +10,13 @@ const {
   unlikeFilm,
 } = require("../controllers/filmControllers");
 
-// multer for image upload
-const multer = require("multer");
-const upload = multer({ dest: "uploads/" });
+const { uploadImage } = require("../middlewares/uploadImages");
 
 //get single films
 router.get("/", getFilms);
 
 //create films
-router.post("/recommend", upload.single("image"), createFilm);
+router.post("/recommend", uploadImage.single("image"), createFilm);
 
 //get single film
 router.get("/:id", getFilm);

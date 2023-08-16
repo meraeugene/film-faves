@@ -12,8 +12,8 @@ const Card = ({ film }: CardProps) => {
       <div className="  flex gap-4 text-xs md:text-sm xl:text-lg ">
         <div className="card-image  w-1/2 md:w-full">
           <img
-            // src={`http://localhost:4000/${film.image}`}
-            src={`https://filmfaves.vercel.app/${film.image}`}
+            src={film.image}
+            // src={`https://filmfaves.vercel.app/${film.image}`}
             alt={film.title}
             className="image rounded-md "
             loading="lazy"

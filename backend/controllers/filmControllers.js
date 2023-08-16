@@ -1,5 +1,6 @@
 const Film = require("../models/filmModel");
 const mongoose = require("mongoose");
+const cloudinaryUploadImg = require("../utils/cloudinary");
 
 //get all films
 
@@ -46,6 +47,7 @@ const getFilms = async (req, res) => {
 const createFilm = async (req, res) => {
   const { category, title, release_date, genre, description, link, username } =
     req.body;
+  const image = req.file;
 
   const requiredFields = [
     "category",
@@ -69,26 +71,40 @@ const createFilm = async (req, res) => {
     return res.status(400).json({ error: "Please upload an image" });
   }
 
-  // Log the data from req.body
-  console.log("Request Body Data:", req.body);
+  try {
+    console.log("Request Body Data:", {
+      category,
+      title,
+      release_date,
+      genre,
+      description,
+      link,
+      image,
+      username,
+    });
 
-  const film = new Film({
-    category,
-    title,
-    release_date,
-    genre,
-    description,
-    link,
-    image: req.file.path,
-    recommendedBy: username,
-  });
+    const newpathObject = await cloudinaryUploadImg(image.path, "image");
+    const newpath = newpathObject.url;
 
-  film
-    .save()
-    .then((res) => console.log("film is saved"))
-    .catch((err) => console.log(err, "error has occurred"));
+    const film = new Film({
+      category,
+      title,
+      release_date,
+      genre,
+      description,
+      link,
+      image: newpath,
+      recommendedBy: username,
+    });
 
-  res.send("film is saved");
+    await film.save();
+
+    console.log("Film is saved");
+    res.status(200).json({ message: "Film is saved" });
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ error: "Server Error" });
+  }
 };
 
 //get single film

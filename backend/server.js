@@ -3,7 +3,6 @@ const express = require("express");
 const app = express();
 const mongoose = require("mongoose");
 const cors = require("cors");
-const path = require("path");
 
 const filmRoutes = require("./routes/filmRoutes");
 const userRoutes = require("./routes/userRoutes");
@@ -18,8 +17,6 @@ app.use(cors());
 
 //to get the req.body
 app.use(express.json());
-
-app.use("/uploads", express.static("uploads"));
 
 //routes
 app.use("/api/films", filmRoutes);
