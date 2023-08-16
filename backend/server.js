@@ -10,6 +10,14 @@ const userRoutes = require("./routes/userRoutes");
 
 //middleware
 app.use((req, res, next) => {
+  res.header(
+    "Access-Control-Allow-Origin",
+    "https://filmsfavesapi.onrender.com/api/films"
+  );
+  res.header(
+    "Access-Control-Allow-Headers",
+    "Origin, X-Requested-With, Content-Type, Accept"
+  );
   console.log(req.method, req.path);
   next();
 });
