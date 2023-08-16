@@ -4,6 +4,7 @@ const app = express();
 const mongoose = require("mongoose");
 const cors = require("cors");
 const path = require("path");
+
 import("node-fetch").then((fetchModule) => {
   const fetch = fetchModule.default;
 
@@ -12,17 +13,21 @@ import("node-fetch").then((fetchModule) => {
 
   //middleware
   app.use((req, res, next) => {
-    res.header("Access-Control-Allow-Origin", "https://filmfaves.vercel.app/");
-    res.header(
-      "Access-Control-Allow-Headers",
-      "Origin, X-Requested-With, Content-Type, Accept"
-    );
     console.log(req.method, req.path);
     next();
   });
 
-  // Enable CORS for all routes
-  app.use(cors());
+  const corsOptions = {
+    origin: [
+      "https://filmfaves.vercel.app",
+      // Add other allowed origins here if needed
+    ],
+    methods: "GET,HEAD,PUT,PATCH,POST,DELETE",
+    credentials: true,
+    optionsSuccessStatus: 204,
+  };
+
+  app.use(cors(corsOptions));
 
   //to get the req.body
   app.use(express.json());
