@@ -1,3 +1,4 @@
+import axios from "axios";
 import { useFilmsContext } from "../hooks/useFilmsContext";
 import { useEffect, useMemo, useState } from "react";
 import Card from "../components/Card";
@@ -27,14 +28,14 @@ const Films = ({ pageNumber }: FilmsProps) => {
     const fetchFilms = async () => {
       setIsLoading(true);
       try {
+        const result = await axios.get(
+          `${import.meta.env.VITE_API_URL}/films?page=${page}`,
+        );
         // const result = await axios.get(
         //   `http://localhost:4000/api/films?page=${page}`,
         // );
-        const result = await fetch(
-          `https://filmsfavesapi.onrender.com/api/films?page=${page}`,
-        );
-        const { data, pages: totalPages } = await result.json();
 
+        const { data, pages: totalPages } = result.data;
         setPages(totalPages);
 
         dispatch({ type: "SET_FILMS", payload: data });

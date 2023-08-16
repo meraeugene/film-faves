@@ -79,7 +79,7 @@ const createFilm = async (req, res) => {
     genre,
     description,
     link,
-    image: req.file.filename,
+    image: req.file.path,
     recommendedBy: username,
   });
 
