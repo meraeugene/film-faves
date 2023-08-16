@@ -41,7 +41,7 @@ import("node-fetch").then((fetchModule) => {
   // Proxy route
   app.get("/api/proxy", async (req, res) => {
     try {
-      const remoteUrl = "https://filmsfavesapi.onrender.com/api/films"; // Update with the correct remote API URL
+      const remoteUrl = "https://filmsfavesapi.onrender.com/api/films?page=1"; // Update the URL here
       const response = await fetch(remoteUrl);
       const data = await response.json();
       res.json(data);
