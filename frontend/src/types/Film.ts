@@ -1,9 +1,8 @@
 export type Film = {
   _id?: string;
-  category: string;
+  genre: string;
   title: string;
   release_date: number;
-  genre: string;
   description: string;
   link: string;
   image: any;

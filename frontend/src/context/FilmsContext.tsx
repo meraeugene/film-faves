@@ -40,7 +40,7 @@ export const FilmsContextProvider = ({
   children,
 }: FilmsContextProviderProps) => {
   const [state, dispatch] = useReducer(filmsReducer, {
-    films: [],
+    films: [], // Make sure the initial value is an empty array
   });
 
   return (

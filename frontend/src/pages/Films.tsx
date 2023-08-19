@@ -1,104 +1,71 @@
+import SortedFilms from "../components/SortedFilms";
+import { useState, useEffect } from "react"; // Import useState and useEffect
+
 import axios from "axios";
 import { useFilmsContext } from "../hooks/useFilmsContext";
-import { useEffect, useMemo, useState } from "react";
-import Card from "../components/Card";
-import CardSkeleton from "../components/CardSkeleton";
-import Pagination from "../components/Pagination";
+import FilmsCardSkeleton from "../components/skeletons/FilmsCardSkeleton";
 
-interface FilmsProps {
-  pageNumber: number;
-}
-
-const Films = ({ pageNumber }: FilmsProps) => {
-  const parsedPageNumber = Number(pageNumber);
-
+const Films = () => {
   const {
     state: { films },
     dispatch,
   } = useFilmsContext();
 
-  const [isLoading, setIsLoading] = useState(true);
-
-  const [page, setPage] = useState(parsedPageNumber);
-  const [pages, setPages] = useState(1);
+  const [loading, setLoading] = useState(true); // Add a loading state
 
   useEffect(() => {
-    window.scrollTo(0, 0);
-
+    setLoading(true);
     const fetchFilms = async () => {
-      setIsLoading(true);
       try {
-        const result = await axios.get(
-          `${import.meta.env.VITE_API_URL}/films?page=${page}`,
-        );
-        // const result = await axios.get(
-        //   `http://localhost:4000/api/films?page=${page}`,
-        // );
-
-        const { data, pages: totalPages } = result.data;
-        setPages(totalPages);
+        // const result = await axios.get("http://localhost:4000/api/films");
+        const result = await axios.get(`${import.meta.env.VITE_API_URL}/films`);
+        const { data } = result.data;
 
         dispatch({ type: "SET_FILMS", payload: data });
-
-        console.log(films);
-
-        setIsLoading(false);
       } catch (error) {
         console.error("Error fetching films:", error);
-        setIsLoading(false);
+      } finally {
+        setLoading(false);
       }
     };
 
+    // Simulate a delay to see the loading text
     fetchFilms();
-  }, [page]);
+  }, [dispatch]);
 
-  const [option, setOption] = useState("");
+  const currentYear = new Date().getFullYear();
+  const latestFilms = films.filter((film) => film.release_date === currentYear);
 
-  const handleSelectOption = (e: React.ChangeEvent<HTMLSelectElement>) => {
-    setOption(e.target.value);
-  };
-
-  const filteredFilms = useMemo(() => {
-    let sortedFilms = [...films];
-
-    if (option === "latest") {
-      sortedFilms.sort((a, b) => b.release_date - a.release_date);
-    } else if (option === "popular") {
-      sortedFilms.sort((a, b) => b.likes - a.likes);
-    } else if (option !== "") {
-      sortedFilms = films.filter((film) => film.category === option);
-    }
-
-    return sortedFilms;
-  }, [option, films]);
+  const actionAdventureFilms = films.filter(
+    (film) => film.genre === "action-adventure",
+  );
+  const animationFilms = films.filter((film) => film.genre === "animation");
+  const documentaryFilms = films.filter(
+    (film) => film.genre === "documentaries",
+  );
+  const thrillerFilms = films.filter((film) => film.genre === "thriller");
 
   return (
     <div className="films bg-dark  text-white">
-      <h1 className="pb-4  text-center  font-researcher text-xl tracking-widest md:text-5xl lg:text-6xl xl:mx-auto xl:max-w-6xl">
-        Top Films Recommendations
-      </h1>
-      <select
-        className="w-full font-aquire lg:text-lg "
-        id="category"
-        onChange={handleSelectOption}
-      >
-        <option value="" hidden>
-          Select a category
-        </option>
-        <option value="">All</option>
-        <option value="latest">Latest</option>
-        <option value="popular">Most Popular</option>
-        <option value="live-action">Live-action Movies</option>
-        <option value="animation">Animation</option>
-      </select>
-      <div className="mt-12 grid grid-cols-1 gap-14 md:grid-cols-2 xl:grid-cols-3 ">
-        {isLoading ? (
-          <CardSkeleton filmsPerPage={9} />
-        ) : (
-          filteredFilms.map((film) => <Card key={film._id} film={film} />)
-        )}
-      </div>
-      <Pagination page={page} pages={pages} changePage={setPage} />
+      {loading ? (
+        <FilmsCardSkeleton />
+      ) : (
+        <>
+          <SortedFilms title="new releases" sortedFilm={latestFilms} />
+
+          <SortedFilms
+            title="action-adventure"
+            sortedFilm={actionAdventureFilms}
+          />
+
+          <SortedFilms title="anime" sortedFilm={animationFilms} />
+
+          <SortedFilms title="documentaries" sortedFilm={documentaryFilms} />
+          <SortedFilms title="thriller" sortedFilm={thrillerFilms} />
+
+          {/* <Pagination page={page} pages={pages} changePage={setPage} /> */}
+        </>
+      )}
     </div>
   );
 };

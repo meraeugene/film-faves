@@ -3,7 +3,7 @@ const Schema = mongoose.Schema;
 
 const filmSchema = new Schema(
   {
-    category: {
+    genre: {
       type: String,
       required: true,
     },
@@ -13,10 +13,6 @@ const filmSchema = new Schema(
     },
     release_date: {
       type: Number,
-      required: true,
-    },
-    genre: {
-      type: String,
       required: true,
     },
     description: {

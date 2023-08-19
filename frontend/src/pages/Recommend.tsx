@@ -17,10 +17,9 @@ import { useAuthContext } from "../hooks/useAuthContext";
 
 const Recommend = () => {
   const [image, setImage] = useState<File | null>(null);
-  const [category, setCategory] = useState("");
+  const [genre, setGenre] = useState("");
   const [title, setTitle] = useState("");
   const [releaseDate, setReleaseDate] = useState("");
-  const [genre, setGenre] = useState("");
   const [description, setDescription] = useState("");
   const [link, setLink] = useState("");
   const toast = useToast();
@@ -44,7 +43,6 @@ const Recommend = () => {
     setLoading(true);
 
     const formData = new FormData();
-    formData.append("category", category);
     formData.append("title", title);
     formData.append("release_date", releaseDate);
     formData.append("genre", genre);
@@ -55,14 +53,7 @@ const Recommend = () => {
       formData.append("username", user.username); // Attach username here
     }
 
-    if (
-      !category ||
-      !title ||
-      !releaseDate ||
-      !genre ||
-      !description ||
-      !link
-    ) {
+    if (!genre || !title || !releaseDate || !description || !link) {
       toast({
         title: "Film not uploaded.",
         description: "Please fill in all fields ",
@@ -105,8 +96,8 @@ const Recommend = () => {
 
     try {
       const response = await axios.post(
-        `${import.meta.env.VITE_API_URL}/films/recommend`,
-        // "http://localhost:4000/api/films/recommend",
+        // `${import.meta.env.VITE_API_URL}/films/recommend`,
+        "http://localhost:4000/api/films/recommend",
         formData,
         {
           headers: {
@@ -134,7 +125,7 @@ const Recommend = () => {
 
         dispatch({ type: "CREATE_FILMS", payload: recommendedFilm });
 
-        // Redirect the user to /films route
+        // // Redirect the user to /films route
         navigate("/films");
       } else {
         console.log(response.data.error);
@@ -161,8 +152,8 @@ const Recommend = () => {
     }
   };
 
-  const handleCategoryChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
-    setCategory(e.target.value);
+  const handleGenreChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
+    setGenre(e.target.value);
   };
 
   const onBlur = (
@@ -181,11 +172,10 @@ const Recommend = () => {
   };
 
   const resetForm = () => {
+    setGenre("");
     setImage(null);
-    setCategory("");
     setTitle("");
     setReleaseDate("");
-    setGenre("");
     setDescription("");
     setLink("");
     setTouched({});
@@ -207,7 +197,7 @@ const Recommend = () => {
   };
 
   return (
-    <div className="recommend h-full bg-dark px-6 pb-12 pt-16 uppercase text-white">
+    <div className="recommend mb-12 h-full bg-dark px-6 pt-16 uppercase text-white">
       <h1 className="text-center font-researcher text-3xl md:text-4xl lg:text-5xl">
         Recommend
       </h1>
@@ -217,28 +207,37 @@ const Recommend = () => {
       <form onSubmit={submitImage}>
         <div className="form-body">
           <FormControl
-            isInvalid={touched.category && !category}
+            isInvalid={touched.genre && !genre}
             className="input-box"
             isRequired
           >
-            <FormLabel>Category:</FormLabel>
+            <FormLabel>Genre:</FormLabel>
             <Select
-              name="category"
+              name="genre"
               variant="outline"
-              id="recommend-category"
-              value={category}
-              onChange={handleCategoryChange}
+              id="genre"
+              value={genre}
+              onChange={handleGenreChange}
               onBlur={onBlur}
               className="cursor-pointer"
             >
               <option value="" hidden>
                 Select a category
               </option>
-              <option value="live-action">Live-Action</option>
+              <option value="action-adventure">Action-Adventure</option>
               <option value="animation">Animation</option>
+              <option value="comedy">Comedy</option>
+              <option value="documentaries">Documentaries</option>
+              <option value="filipino">Filipino</option>
+              <option value="horror">Horror</option>
+              <option value="k-drama">K-Drama</option>
+              <option value="romantic">Romantic</option>
+              <option value="sci-fi">Sci-Fi</option>
+              <option value="southeast-asian">Southeast Asian</option>
+              <option value="thriller">Thriller</option>
             </Select>
             <FormErrorMessage className="font-outfit tracking-wider">
-              Category is required.
+              Genre is required.
             </FormErrorMessage>
           </FormControl>
 
@@ -262,17 +261,6 @@ const Recommend = () => {
             value={releaseDate}
             name="release_date"
             error="Year is required."
-          />
-
-          <InputField
-            title="Genre"
-            type="text"
-            isInvalid={touched.genre && !genre}
-            onChange={(e) => setGenre(e.target.value)}
-            onBlur={onBlur}
-            value={genre}
-            name="genre"
-            error="Genre is required."
           />
 
           <FormControl
