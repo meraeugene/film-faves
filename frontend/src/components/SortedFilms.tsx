@@ -92,7 +92,7 @@ const SortedFilms: React.FC<SortedFilmsProps> = ({ title, sortedFilm }) => {
               "https://res.cloudinary.com/dupynxkci/image/upload/",
               "",
             );
-            const myImage = cld.image(imgUrl);
+            const myImage = cld.image(imgUrl).format("auto");
 
             return (
               <SwiperSlide key={film._id}>
@@ -106,6 +106,7 @@ const SortedFilms: React.FC<SortedFilmsProps> = ({ title, sortedFilm }) => {
                   <AdvancedImage
                     cldImg={myImage}
                     plugins={[placeholder({ mode: "blur" }), lazyload()]}
+                    className="image rounded-sm"
                   />
                 </Link>
               </SwiperSlide>

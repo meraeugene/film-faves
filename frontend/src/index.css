@@ -101,7 +101,7 @@ html {
 }
 
 .image {
-  height: auto;
+  height: 100%;
   width: 200px;
   object-fit: cover;
 }
@@ -325,6 +325,10 @@ form button {
     height: 450px;
     width: 100%;
   }
+
+  .image {
+    height: 100%;
+  }
 }
 
 @media screen and (min-width: 425px) {
@@ -445,7 +449,7 @@ form button {
 
   .image {
     width: 100% !important;
-    height: auto;
+    height: 100%;
   }
 
   .nav {
@@ -460,12 +464,6 @@ form button {
 
   .film-card-skeleton__desktop {
     display: block;
-  }
-}
-
-@media screen and (min-width: 2560px) {
-  .image {
-    height: 450px;
   }
 }
 

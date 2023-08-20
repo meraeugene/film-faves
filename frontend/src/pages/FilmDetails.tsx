@@ -82,7 +82,7 @@ const FilmDetails = () => {
       "https://res.cloudinary.com/dupynxkci/image/upload/",
       "",
     );
-    myImage = cld.image(imgUrl); // Assign myImage
+    myImage = cld.image(imgUrl).format("auto").quality("auto");
   }
 
   const cld = new Cloudinary({
@@ -225,7 +225,7 @@ const FilmDetails = () => {
                       "https://res.cloudinary.com/dupynxkci/image/upload/",
                       "",
                     );
-                    urlImage = cld.image(imgUrl);
+                    urlImage = cld.image(imgUrl).format("auto");
                   }
                   return (
                     <SwiperSlide key={film._id}>
