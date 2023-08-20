@@ -13,6 +13,10 @@ import { Autoplay, Pagination, Navigation } from "swiper/modules";
 import FilmDetailsSkeleton from "../components/skeletons/FilmDetailsSkeleton";
 import SameGenreSkeleton from "../components/skeletons/SameGenreSkeleton";
 
+// Import plugins
+import { AdvancedImage, lazyload, placeholder } from "@cloudinary/react";
+import { Cloudinary } from "@cloudinary/url-gen";
+
 const FilmDetails = () => {
   const { id } = useParams();
   const [singleFilm, setSingleFilm] = useState<Film | null>(null);
@@ -28,6 +32,7 @@ const FilmDetails = () => {
           `${import.meta.env.VITE_API_URL}/films/${id}`,
         );
         const data = await response.json();
+
         setSingleFilm(data);
         setSingleFilmLoading(false);
       } catch (error) {
@@ -64,6 +69,28 @@ const FilmDetails = () => {
       )
     : [];
 
+  let myImage = null; // Declare myImage
+
+  if (singleFilm && singleFilm.image) {
+    // Create and configure your Cloudinary instance.
+    const cld = new Cloudinary({
+      cloud: {
+        cloudName: "dupynxkci",
+      },
+    });
+    const imgUrl = singleFilm.image.replace(
+      "https://res.cloudinary.com/dupynxkci/image/upload/",
+      "",
+    );
+    myImage = cld.image(imgUrl); // Assign myImage
+  }
+
+  const cld = new Cloudinary({
+    cloud: {
+      cloudName: "dupynxkci",
+    },
+  });
+
   return (
     <div>
       <div className="film-details flex h-full flex-col justify-center bg-dark px-4 pt-16 text-white md:px-8">
@@ -86,60 +113,59 @@ const FilmDetails = () => {
         </Link>
         {singleFilmLoading ? (
           <FilmDetailsSkeleton />
-        ) : singleFilm !== null ? (
-          <div className="flex w-full flex-col gap-6 md:flex-row">
-            <div>
-              <img
-                src={singleFilm.image}
-                alt={singleFilm.title}
-                className="film-image w-full rounded-sm object-cover"
-                loading="lazy"
-              />
-            </div>
-            <div className="film-info font-outfit">
-              <div className="mb-2">
-                <LikeButton initialLikes={singleFilm.likes} filmId={id} />
-              </div>
-              <span className="font-outfit xl:text-xl">
-                {singleFilm.release_date}
-              </span>
-              <h1 className="my-2 font-aquire text-xl font-bold tracking-widest xl:text-3xl">
-                {singleFilm.title}
-              </h1>
-              <p className="mb-4 mt-4 text-sm tracking-wider lg:text-lg">
-                {singleFilm.description}
-              </p>
-              <h2 className="my-2 text-sm capitalize lg:text-lg">
-                <span className="text-gray-400">Genres: </span>
-                {singleFilm.genre}
-              </h2>
-              <h2 className="lg:text-lg">
-                <span className="text-sm text-gray-400 lg:text-lg">
-                  Recommended by:
-                </span>{" "}
-                {singleFilm.recommendedBy}
-              </h2>
-              <Link to={singleFilm.link}>
-                <Button className="mt-6 flex gap-2 font-aquire tracking-widest">
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    viewBox="0 0 24 24"
-                    fill="currentColor"
-                    className="h-6 w-6"
-                  >
-                    <path
-                      fillRule="evenodd"
-                      d="M2.25 12c0-5.385 4.365-9.75 9.75-9.75s9.75 4.365 9.75 9.75-4.365 9.75-9.75 9.75S2.25 17.385 2.25 12zm14.024-.983a1.125 1.125 0 010 1.966l-5.603 3.113A1.125 1.125 0 019 15.113V8.887c0-.857.921-1.4 1.671-.983l5.603 3.113z"
-                      clipRule="evenodd"
-                    />
-                  </svg>
-                  Watch Now
-                </Button>
-              </Link>
-            </div>
-          </div>
         ) : (
-          <h1>Single Film not found</h1>
+          singleFilm !== null && (
+            <div className="flex w-full flex-col gap-6 md:flex-row">
+              {myImage && ( // Check if myImage is available
+                <AdvancedImage
+                  cldImg={myImage}
+                  className="film-image  rounded-sm object-cover"
+                  plugins={[placeholder({ mode: "blur" }), lazyload()]}
+                />
+              )}
+              <div className="film-info font-outfit">
+                <div className="mb-2">
+                  <LikeButton initialLikes={singleFilm.likes} filmId={id} />
+                </div>
+                <span className="font-outfit xl:text-xl">
+                  {singleFilm.release_date}
+                </span>
+                <h1 className="my-2 font-aquire text-xl font-bold tracking-widest xl:text-3xl">
+                  {singleFilm.title}
+                </h1>
+                <p className="mb-4 mt-4 text-sm tracking-wider lg:text-lg">
+                  {singleFilm.description}
+                </p>
+                <h2 className="my-2 text-sm capitalize lg:text-lg">
+                  <span className="text-gray-400">Genres: </span>
+                  {singleFilm.genre}
+                </h2>
+                <h2 className="lg:text-lg">
+                  <span className="text-sm text-gray-400 lg:text-lg">
+                    Recommended by:
+                  </span>{" "}
+                  {singleFilm.recommendedBy}
+                </h2>
+                <Link to={singleFilm.link}>
+                  <Button className="mt-6 flex gap-2 font-aquire tracking-widest">
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      viewBox="0 0 24 24"
+                      fill="currentColor"
+                      className="h-6 w-6"
+                    >
+                      <path
+                        fillRule="evenodd"
+                        d="M2.25 12c0-5.385 4.365-9.75 9.75-9.75s9.75 4.365 9.75 9.75-4.365 9.75-9.75 9.75S2.25 17.385 2.25 12zm14.024-.983a1.125 1.125 0 010 1.966l-5.603 3.113A1.125 1.125 0 019 15.113V8.887c0-.857.921-1.4 1.671-.983l5.603 3.113z"
+                        clipRule="evenodd"
+                      />
+                    </svg>
+                    Watch Now
+                  </Button>
+                </Link>
+              </div>
+            </div>
+          )
         )}
 
         <div className=" pb-8 pt-0">
@@ -192,22 +218,36 @@ const FilmDetails = () => {
                 modules={[Autoplay, Pagination, Navigation]}
                 className="mySwiper"
               >
-                {sameGenreFilms.map((film) => (
-                  <SwiperSlide key={film._id}>
-                    <Link
-                      to={`/films/${film._id}`}
-                      key={film._id}
-                      onClick={handleImageClick}
-                    >
-                      <img
-                        src={film.image}
-                        alt={film.title}
-                        className="image  rounded-sm"
-                        loading="lazy"
-                      />
-                    </Link>
-                  </SwiperSlide>
-                ))}
+                {sameGenreFilms.map((film) => {
+                  let urlImage;
+                  if (film.image) {
+                    const imgUrl = film.image.replace(
+                      "https://res.cloudinary.com/dupynxkci/image/upload/",
+                      "",
+                    );
+                    urlImage = cld.image(imgUrl);
+                  }
+                  return (
+                    <SwiperSlide key={film._id}>
+                      <Link
+                        to={`/films/${film._id}`}
+                        key={film._id}
+                        onClick={handleImageClick}
+                      >
+                        {urlImage && (
+                          <AdvancedImage
+                            cldImg={urlImage}
+                            className="image  rounded-sm"
+                            plugins={[
+                              placeholder({ mode: "blur" }),
+                              lazyload(),
+                            ]}
+                          />
+                        )}
+                      </Link>
+                    </SwiperSlide>
+                  );
+                })}
               </Swiper>
             ) : (
               <h1>No Same Genre Films found</h1>

@@ -101,8 +101,8 @@ html {
 }
 
 .image {
-  height: 220px;
-  width: 100%;
+  height: auto;
+  width: 200px;
   object-fit: cover;
 }
 
@@ -221,23 +221,19 @@ form button {
   display: none;
 }
 
-.film-info {
-  max-width: 280px;
-}
-
 .film-details {
   width: 100%;
 }
 
 .film-image {
-  width: 180px;
-  height: 100%;
+  width: 100%;
+  height: auto;
 }
 
 /* skeleton */
 .film-details__image {
-  height: 250px;
-  width: 170px;
+  height: 400px;
+  width: 100%;
   border-radius: 4px;
 }
 
@@ -324,6 +320,11 @@ form button {
     width: 167px;
     height: 250px;
   }
+
+  .film-details__image {
+    height: 450px;
+    width: 100%;
+  }
 }
 
 @media screen and (min-width: 425px) {
@@ -341,12 +342,22 @@ form button {
     width: 192px;
     height: 288px;
   }
+
+  .film-details__image {
+    height: 500px;
+    width: 100%;
+  }
 }
 
 @media screen and (min-width: 768px) {
   .film-image {
+    width: 270px !important;
+    height: auto;
+  }
+
+  .image {
     width: 100% !important;
-    height: 360px;
+    height: auto;
   }
 
   .film-details__image {
@@ -395,13 +406,12 @@ form button {
 }
 
 @media screen and (min-width: 1024px) {
-  .film-info {
-    max-width: 700px;
+  .film-image {
+    width: 300px !important;
   }
 
-  .film-image {
-    width: 100% !important;
-    height: 400px;
+  .film-info {
+    max-width: 550px;
   }
 
   .film-details__image {
@@ -435,7 +445,7 @@ form button {
 
   .image {
     width: 100% !important;
-    height: 340px;
+    height: auto;
   }
 
   .nav {

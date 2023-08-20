@@ -9,6 +9,10 @@ import "swiper/css/navigation";
 import { Autoplay, Pagination, Navigation } from "swiper/modules";
 import { Link } from "react-router-dom";
 
+// Import plugins
+import { AdvancedImage, lazyload, placeholder } from "@cloudinary/react";
+import { Cloudinary } from "@cloudinary/url-gen";
+
 interface SortedFilmsProps {
   title: string;
   sortedFilm: Film[];
@@ -23,6 +27,13 @@ const SortedFilms: React.FC<SortedFilmsProps> = ({ title, sortedFilm }) => {
   const handleClick = () => {
     window.scrollTo({ top: 0 });
   };
+
+  // Create and configure your Cloudinary instance.
+  const cld = new Cloudinary({
+    cloud: {
+      cloudName: "dupynxkci",
+    },
+  });
 
   return (
     <div className="films__container mb-6 xl:mb-14 ">
@@ -76,18 +87,30 @@ const SortedFilms: React.FC<SortedFilmsProps> = ({ title, sortedFilm }) => {
         className="mySwiper"
       >
         {sortedFilm.map((film) => {
-          return (
-            <SwiperSlide key={film._id}>
-              <Link to={`/films/${film._id}`} onClick={handleClick}>
-                <img
-                  src={film.image}
-                  alt={film.title}
-                  className="image rounded-sm"
-                  loading="lazy"
-                />
-              </Link>
-            </SwiperSlide>
-          );
+          if (film.image) {
+            const imgUrl = film.image.replace(
+              "https://res.cloudinary.com/dupynxkci/image/upload/",
+              "",
+            );
+            const myImage = cld.image(imgUrl);
+
+            return (
+              <SwiperSlide key={film._id}>
+                <Link to={`/films/${film._id}`} onClick={handleClick}>
+                  {/* <img
+                    src={film.image}
+                    alt={film.title}
+                    className="image rounded-sm"
+                    loading="lazy"
+                  /> */}
+                  <AdvancedImage
+                    cldImg={myImage}
+                    plugins={[placeholder({ mode: "blur" }), lazyload()]}
+                  />
+                </Link>
+              </SwiperSlide>
+            );
+          }
         })}
       </Swiper>
     </div>

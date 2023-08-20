@@ -3,7 +3,7 @@ import "react-loading-skeleton/dist/skeleton.css";
 
 const FilmDetailsSkeleton = () => {
   return (
-    <div className="flex flex-col gap-12 md:flex-row">
+    <div className="flex flex-col gap-6 md:flex-row">
       <div>
         <Skeleton className="film-details__image" />
       </div>
