@@ -1,9 +1,8 @@
 import SortedFilms from "../components/SortedFilms";
-import { useState, useEffect } from "react"; // Import useState and useEffect
+import { useEffect } from "react"; // Import useState and useEffect
 
 import axios from "axios";
 import { useFilmsContext } from "../hooks/useFilmsContext";
-import FilmsCardSkeleton from "../components/skeletons/FilmsCardSkeleton";
 
 const Films = () => {
   const {
@@ -11,10 +10,7 @@ const Films = () => {
     dispatch,
   } = useFilmsContext();
 
-  const [loading, setLoading] = useState(true); // Add a loading state
-
   useEffect(() => {
-    setLoading(true);
     const fetchFilms = async () => {
       try {
         // const result = await axios.get("http://localhost:4000/api/films");
@@ -24,8 +20,6 @@ const Films = () => {
         dispatch({ type: "SET_FILMS", payload: data });
       } catch (error) {
         console.error("Error fetching films:", error);
-      } finally {
-        setLoading(false);
       }
     };
 
@@ -47,25 +41,21 @@ const Films = () => {
 
   return (
     <div className="films bg-dark  text-white">
-      {loading ? (
-        <FilmsCardSkeleton />
-      ) : (
-        <>
-          <SortedFilms title="new releases" sortedFilm={latestFilms} />
+      <>
+        <SortedFilms title="new releases" sortedFilm={latestFilms} />
 
-          <SortedFilms
-            title="action-adventure"
-            sortedFilm={actionAdventureFilms}
-          />
+        <SortedFilms
+          title="action-adventure"
+          sortedFilm={actionAdventureFilms}
+        />
 
-          <SortedFilms title="anime" sortedFilm={animationFilms} />
+        <SortedFilms title="anime" sortedFilm={animationFilms} />
 
-          <SortedFilms title="documentaries" sortedFilm={documentaryFilms} />
-          <SortedFilms title="thriller" sortedFilm={thrillerFilms} />
+        <SortedFilms title="documentaries" sortedFilm={documentaryFilms} />
+        <SortedFilms title="thriller" sortedFilm={thrillerFilms} />
 
-          {/* <Pagination page={page} pages={pages} changePage={setPage} /> */}
-        </>
-      )}
+        {/* <Pagination page={page} pages={pages} changePage={setPage} /> */}
+      </>
     </div>
   );
 };
