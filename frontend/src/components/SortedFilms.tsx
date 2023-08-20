@@ -9,10 +9,6 @@ import "swiper/css/navigation";
 import { Autoplay, Pagination, Navigation } from "swiper/modules";
 import { Link } from "react-router-dom";
 
-// Import plugins
-import { AdvancedImage, lazyload, placeholder } from "@cloudinary/react";
-import { Cloudinary } from "@cloudinary/url-gen";
-
 interface SortedFilmsProps {
   title: string;
   sortedFilm: Film[];
@@ -28,18 +24,18 @@ const SortedFilms: React.FC<SortedFilmsProps> = ({ title, sortedFilm }) => {
     window.scrollTo({ top: 0 });
   };
 
-  // Create and configure your Cloudinary instance.
-  const cld = new Cloudinary({
-    cloud: {
-      cloudName: "dupynxkci",
-    },
-  });
+  // Autoplay settings for the latest films
+  const autoplaySettings = {
+    delay: 2500,
+    disableOnInteraction: true,
+  };
 
   return (
     <div className="films__container mb-6 xl:mb-14 ">
       <h1 className="mb-4 font-aquire text-xl font-bold capitalize tracking-widest xl:mb-8 xl:text-4xl">
         {title}
       </h1>
+
       <Swiper
         style={
           {
@@ -47,14 +43,15 @@ const SortedFilms: React.FC<SortedFilmsProps> = ({ title, sortedFilm }) => {
             "--swiper-pagination-color": "#fff",
           } as CSSProperties
         }
+        className="mySwiper"
         centeredSlides={false}
-        autoplay={{
-          delay: 2500,
-          disableOnInteraction: true,
-        }}
         pagination={{
           clickable: true,
         }}
+        autoplay={
+          // Apply autoplay settings only for latest films
+          title === "new releases" ? autoplaySettings : false
+        }
         navigation={true}
         breakpoints={{
           320: {
@@ -84,34 +81,20 @@ const SortedFilms: React.FC<SortedFilmsProps> = ({ title, sortedFilm }) => {
           },
         }}
         modules={[Autoplay, Pagination, Navigation]}
-        className="mySwiper"
       >
         {sortedFilm.map((film) => {
-          if (film.image) {
-            const imgUrl = film.image.replace(
-              "https://res.cloudinary.com/dupynxkci/image/upload/",
-              "",
-            );
-            const myImage = cld.image(imgUrl);
-
-            return (
-              <SwiperSlide key={film._id}>
-                <Link to={`/films/${film._id}`} onClick={handleClick}>
-                  {/* <img
-                    src={film.image}
-                    alt={film.title}
-                    className="image rounded-sm"
-                    loading="lazy"
-                  /> */}
-                  <AdvancedImage
+          return (
+            <SwiperSlide key={film._id}>
+              <Link to={`/films/${film._id}`} onClick={handleClick}>
+                {/* <AdvancedImage
                     cldImg={myImage}
                     plugins={[placeholder({ mode: "blur" }), lazyload()]}
                     className="image rounded-sm"
-                  />
-                </Link>
-              </SwiperSlide>
-            );
-          }
+                  /> */}
+                <img src={film.image} alt={film.title} loading="lazy" />
+              </Link>
+            </SwiperSlide>
+          );
         })}
       </Swiper>
     </div>

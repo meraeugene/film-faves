@@ -14,10 +14,10 @@ const Home = () => {
               Faves
             </h1>
 
-            <p className="home-desc mt-2 text-center font-outfit text-lg tracking-normal">
+            <p className="home-desc mt-2 text-center font-outfit text-lg tracking-wide">
               Explore, enjoy, and
             </p>
-            <p className="home-desc text-center font-outfit text-lg tracking-normal ">
+            <p className="home-desc text-center font-outfit text-lg tracking-wide ">
               share favorite films here.
             </p>
           </div>
