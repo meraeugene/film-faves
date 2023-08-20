@@ -485,4 +485,8 @@ form button {
   .swiper-button-prev {
     display: none !important;
   }
+
+  .film-card-skeleton__desktop {
+    display: none;
+  }
 }
