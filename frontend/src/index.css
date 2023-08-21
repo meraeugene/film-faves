@@ -261,7 +261,7 @@ form button {
 }
 
 .card-skeleton-mobile .card-img-skeleton {
-  height: 200px;
+  height: 210px;
 }
 
 /* recommend card */
@@ -269,14 +269,14 @@ form button {
 .recommend-card {
   width: 100%;
   height: 340px;
-  background-color: #313131;
-}
-
-.image,
-.recommend-card {
-  width: 100% !important;
-  height: 220px !important;
-  object-fit: cover !important;
+  background: linear-gradient(
+    135deg,
+    rgba(255, 255, 255, 0.1),
+    rgba(255, 255, 255, 0)
+  );
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
 }
 
 /* media query */
@@ -299,6 +299,26 @@ form button {
   .film-details-skeleton-img {
     height: 210px;
   }
+
+  .image,
+  .recommend-card,
+  .card-img-skeleton {
+    width: 100% !important;
+    height: 210px !important;
+  }
+}
+
+@media screen and (min-width: 360px) {
+  .image,
+  .recommend-card,
+  .card-img-skeleton {
+    width: 100% !important;
+    height: 230px !important;
+  }
+
+  .card-img-skeleton {
+    height: 230px !important;
+  }
 }
 
 @media screen and (min-width: 375px) {
@@ -312,7 +332,8 @@ form button {
   }
 
   .image,
-  .recommend-card {
+  .recommend-card,
+  .card-img-skeleton {
     width: 100% !important;
     height: 250px !important;
   }
@@ -322,10 +343,6 @@ form button {
   .skeleton-card-large-screen,
   .film-details-skeleton__tablet {
     display: none;
-  }
-
-  .card-skeleton-mobile .card-img-skeleton {
-    height: 250px;
   }
 
   .film-details-skeleton-img {
@@ -341,10 +358,6 @@ form button {
     display: none;
   }
 
-  .card-skeleton-mobile .card-img-skeleton {
-    height: 300px;
-  }
-
   .film-details-skeleton-img {
     height: 260px;
   }
@@ -354,9 +367,10 @@ form button {
   }
 
   .image,
-  .recommend-card {
+  .recommend-card,
+  .card-img-skeleton {
     width: 100% !important;
-    height: 340px !important;
+    height: 280px !important;
   }
 }
 
