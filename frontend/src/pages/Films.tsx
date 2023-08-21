@@ -22,6 +22,7 @@ const Films = () => {
 
   useEffect(() => {
     const fetchFilms = async () => {
+      window.scrollTo(0, 0);
       try {
         // const result = await axios.get("http://localhost:4000/api/films");
         const result = await axios.get(`${import.meta.env.VITE_API_URL}/films`);
