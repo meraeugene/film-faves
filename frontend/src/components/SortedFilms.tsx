@@ -9,13 +9,19 @@ import "swiper/css/navigation";
 import { Autoplay, Pagination, Navigation } from "swiper/modules";
 import { Link } from "react-router-dom";
 import RecommendCard from "./RecommendCard";
+import { Tooltip } from "@chakra-ui/react";
 
 interface SortedFilmsProps {
   title: string;
   sortedFilm: Film[];
+  openGenreModal: (genre: string) => void;
 }
 
-const SortedFilms: React.FC<SortedFilmsProps> = ({ title, sortedFilm }) => {
+const SortedFilms: React.FC<SortedFilmsProps> = ({
+  title,
+  sortedFilm,
+  openGenreModal,
+}) => {
   if (!Array.isArray(sortedFilm)) {
     // Handle the case where sortedFilm is not an array
     return <p>No films available</p>;
@@ -31,11 +37,39 @@ const SortedFilms: React.FC<SortedFilmsProps> = ({ title, sortedFilm }) => {
     disableOnInteraction: true,
   };
 
+  const capitalizeWords = (str: string) => {
+    return str
+      .split(/\s|-/)
+      .map((word) => word.charAt(0).toUpperCase() + word.slice(1))
+      .join(" ");
+  };
+
   return (
-    <div className="films__container mb-6 xl:mb-14 ">
-      <h1 className="mb-4 font-aquire text-xl font-bold capitalize tracking-widest xl:mb-8 xl:text-4xl">
-        {title}
-      </h1>
+    <div className="films__container relative mb-6 xl:mb-14 ">
+      <div
+        className="mb-6 inline-block cursor-pointer items-center xl:text-4xl"
+        onClick={() => openGenreModal(title)}
+      >
+        <Tooltip label={`Browse All ${capitalizeWords(title)} Films`}>
+          <h1 className="inline-block align-middle font-aquire  text-xl font-bold capitalize tracking-widest md:text-3xl xl:text-4xl ">
+            {title}
+          </h1>
+        </Tooltip>
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          fill="none"
+          viewBox="0 0 24 24"
+          strokeWidth={1.5}
+          stroke="currentColor"
+          className="ml-2 inline-block h-4 w-4 align-middle xl:h-8 xl:w-8"
+        >
+          <path
+            strokeLinecap="round"
+            strokeLinejoin="round"
+            d="M11.25 4.5l7.5 7.5-7.5 7.5m-6-15l7.5 7.5-7.5 7.5"
+          />
+        </svg>
+      </div>
 
       <Swiper
         style={
@@ -85,23 +119,21 @@ const SortedFilms: React.FC<SortedFilmsProps> = ({ title, sortedFilm }) => {
       >
         {sortedFilm.map((film) => {
           return (
-            <>
-              <SwiperSlide key={film._id}>
-                <Link to={`/films/${film._id}`} onClick={handleClick}>
-                  {/* <AdvancedImage
+            <SwiperSlide key={film._id}>
+              <Link to={`/films/${film._id}`} onClick={handleClick}>
+                {/* <AdvancedImage
                     cldImg={myImage}
                     plugins={[placeholder({ mode: "blur" }), lazyload()]}
                     className="image rounded-sm"
                   /> */}
-                  <img
-                    src={film.image}
-                    alt={film.title}
-                    loading="lazy"
-                    className="image rounded-sm"
-                  />
-                </Link>
-              </SwiperSlide>
-            </>
+                <img
+                  src={film.image}
+                  alt={film.title}
+                  loading="lazy"
+                  className="image rounded-sm"
+                />
+              </Link>
+            </SwiperSlide>
           );
         })}
         {sortedFilm.length < 6 &&

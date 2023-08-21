@@ -1,7 +1,16 @@
 import InputField from "../components/InputField";
 import { handleBlur } from "../utils/FormUtils";
 import { useState, useEffect } from "react";
-import { Button, useToast } from "@chakra-ui/react";
+import {
+  Button,
+  useToast,
+  FormControl,
+  FormLabel,
+  InputGroup,
+  Input,
+  InputRightElement,
+  FormErrorMessage,
+} from "@chakra-ui/react";
 import { useSignup } from "../hooks/useSignup";
 const Signup = () => {
   const [username, setUsername] = useState("");
@@ -9,6 +18,9 @@ const Signup = () => {
   const [password, setPassword] = useState("");
   const [touched, setTouched] = useState<Record<string, boolean>>({});
   const { signup, error, isLoading } = useSignup();
+  const [show, setShow] = useState(false);
+
+  const handleClick = () => setShow(!show);
 
   const toast = useToast();
 
@@ -62,16 +74,30 @@ const Signup = () => {
           error="Email is required."
         />
 
-        <InputField
-          onChange={(e) => setPassword(e.target.value)}
-          onBlur={onBlur}
-          title="Password"
-          type="password"
+        <FormControl
           isInvalid={touched.password && !password}
-          value={password}
-          name="password"
-          error="Password is required."
-        />
+          className="input-box "
+          isRequired
+        >
+          <FormLabel className="lg:text-2xl ">Password:</FormLabel>
+          <InputGroup size="md">
+            <Input
+              type={show ? "text" : "password"}
+              onChange={(e) => setPassword(e.target.value)}
+              onBlur={onBlur}
+              value={password}
+              name="password"
+            />
+            <InputRightElement width="4.5rem">
+              <button type="button" className="text-sm " onClick={handleClick}>
+                {show ? "Hide" : "Show"}
+              </button>
+            </InputRightElement>
+          </InputGroup>
+          <FormErrorMessage className="font-outfit tracking-wider">
+            Password is required.
+          </FormErrorMessage>
+        </FormControl>
 
         <Button
           loadingText="Creating Account..."

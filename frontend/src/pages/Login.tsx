@@ -1,7 +1,16 @@
 import InputField from "../components/InputField";
 import { handleBlur } from "../utils/FormUtils";
 import { useEffect, useState } from "react";
-import { Button, useToast } from "@chakra-ui/react";
+import {
+  Button,
+  useToast,
+  FormControl,
+  FormLabel,
+  Input,
+  FormErrorMessage,
+  InputRightElement,
+  InputGroup,
+} from "@chakra-ui/react";
 import { Link } from "react-router-dom";
 import { useLogin } from "../hooks/useLogin";
 
@@ -10,6 +19,10 @@ const Login = () => {
   const [password, setPassword] = useState("");
   const [touched, setTouched] = useState<Record<string, boolean>>({});
   const { login, error, isLoading } = useLogin();
+  const [show, setShow] = useState(false);
+
+  const handleClick = () => setShow(!show);
+
   const toast = useToast();
 
   const onBlur = (event: React.FocusEvent<HTMLInputElement>) => {
@@ -28,7 +41,7 @@ const Login = () => {
         title: "Login Error",
         description: error,
         status: "error",
-        duration: 4500,
+        duration: 3500,
         isClosable: true,
         position: "top",
       });
@@ -50,16 +63,30 @@ const Login = () => {
           error="Username is required."
         />
 
-        <InputField
-          onChange={(e) => setPassword(e.target.value)}
-          onBlur={onBlur}
-          title="Password"
-          type="password"
+        <FormControl
           isInvalid={touched.password && !password}
-          value={password}
-          name="password"
-          error="Password is required."
-        />
+          className="input-box "
+          isRequired
+        >
+          <FormLabel className="lg:text-2xl ">Password:</FormLabel>
+          <InputGroup size="md">
+            <Input
+              type={show ? "text" : "password"}
+              onChange={(e) => setPassword(e.target.value)}
+              onBlur={onBlur}
+              value={password}
+              name="password"
+            />
+            <InputRightElement width="4.5rem">
+              <button type="button" className="text-sm " onClick={handleClick}>
+                {show ? "Hide" : "Show"}
+              </button>
+            </InputRightElement>
+          </InputGroup>
+          <FormErrorMessage className="font-outfit tracking-wider">
+            Password is required.
+          </FormErrorMessage>
+        </FormControl>
 
         <Button
           loadingText="Logging in..."

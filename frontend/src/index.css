@@ -26,6 +26,14 @@
   border-radius: 8px;
 }
 
+input:-webkit-autofill,
+input:-webkit-autofill:hover,
+input:-webkit-autofill:focus {
+  -webkit-box-shadow: 0 0 0px 1000px #808080 inset;
+  /* Set the background color to your preferred color */
+  background-color: transparent; /* or any other color you want */
+}
+
 html {
   background-color: #010101;
 }
@@ -97,22 +105,90 @@ a:active {
   font-family: Aquire;
 }
 
-.film-button {
-  background-color: #fff;
-  color: black;
-  padding: 9px 27px;
-  border-radius: 4px;
-  font-family: Aquire;
+/* genre movie modal */
+.main-container__modal {
+  position: fixed;
+  height: 100vh;
+  width: 100%;
+  top: 0;
+  left: 0;
+  background-color: rgba(0, 0, 0, 0.8);
+  z-index: 10;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
-.film-button-info {
-  background-color: rgb(102, 113, 117);
+.genre-movie__modal {
+  padding-bottom: 6em;
+  margin-top: 4em;
+  height: 100vh;
+  width: 80%;
+  background-color: rgb(24, 24, 24);
   color: #fff;
-  padding: 9px 27px;
-  border-radius: 4px;
-  font-family: Aquire;
+  border-radius: 2px;
+  position: relative;
+  overflow-y: auto;
+  padding-left: 2em;
+  padding-right: 2em;
 }
 
+.genre-movie__modal-close-btn {
+  position: absolute;
+  right: 15px;
+  top: 15px;
+}
+
+.modal-open {
+  overflow: hidden;
+}
+
+/* logout modal */
+.logout-modal-bg {
+  position: fixed;
+  height: 100vh;
+  width: 100%;
+  top: 0;
+  left: 0;
+  background-color: rgba(0, 0, 0, 0.7);
+  z-index: 10;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.logout-modal {
+  margin-top: 4em;
+  height: 30vh;
+  width: 80%;
+  background-color: #2d3748;
+  border-radius: 4px;
+  position: relative;
+  overflow-y: auto;
+}
+
+.logout-modal__header {
+  width: 100%;
+  padding: 0.7em 0 0.7em 0.7em;
+}
+
+.logout-modal__body {
+  padding: 0.7em 0.8em;
+}
+
+.logout-model__footer .no-btn {
+  background-color: rgba(255, 255, 255, 0.3);
+  padding: 0.4em 1em;
+  border-radius: 2px;
+}
+
+.logout-model__footer .yes-btn {
+  background-color: #feb2b2;
+  padding: 0.4em 1em;
+  border-radius: 2px;
+}
+
+/* form */
 .form {
   max-width: 400px;
   width: 100%;
@@ -274,13 +350,19 @@ form button {
     rgba(255, 255, 255, 0.1),
     rgba(255, 255, 255, 0)
   );
-  backdrop-filter: blur(10px);
-  -webkit-backdrop-filter: blur(10px);
-  box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
 }
 
 /* media query */
 @media screen and (min-width: 320px) {
+  .genre-movie__modal {
+    padding-bottom: 2em;
+    margin-top: 0;
+    padding-right: 1em;
+    padding-left: 1em;
+    height: 90vh;
+    width: 90%;
+  }
+
   .films {
     padding: 4em 1rem;
     padding-bottom: 1em;
@@ -306,6 +388,12 @@ form button {
     width: 100% !important;
     height: 210px !important;
   }
+
+  .modal-image {
+    object-fit: cover;
+    height: 170px;
+    width: 100%;
+  }
 }
 
 @media screen and (min-width: 360px) {
@@ -319,12 +407,32 @@ form button {
   .card-img-skeleton {
     height: 230px !important;
   }
+
+  .modal-image {
+    object-fit: cover;
+    height: 190px;
+    width: 100%;
+  }
+
+  .logout-modal {
+    width: 70%;
+  }
 }
 
 @media screen and (min-width: 375px) {
   .films {
     padding: 4em 1rem;
     padding-bottom: 1em;
+  }
+
+  .modal-image {
+    object-fit: cover;
+    height: 220px;
+    width: 100%;
+  }
+
+  .logout-modal {
+    width: 70%;
   }
 
   .nav-menu {
@@ -358,6 +466,16 @@ form button {
     display: none;
   }
 
+  .logout-modal {
+    width: 70%;
+  }
+
+  .modal-image {
+    object-fit: cover;
+    height: 240px;
+    width: 100%;
+  }
+
   .film-details-skeleton-img {
     height: 260px;
   }
@@ -380,6 +498,30 @@ form button {
   .skeleton-card-large-screen,
   .film-details-skeleton__mobile {
     display: none;
+  }
+
+  .logout-modal {
+    width: 40%;
+  }
+
+  .logout-modal__header {
+    width: 100%;
+    padding: 1em 0 0 1em;
+  }
+
+  .logout-modal__body {
+    padding: 0.7em 1em;
+  }
+
+  .genre-movie__modal {
+    padding-right: 2em;
+    padding-left: 2em;
+  }
+
+  .modal-image {
+    object-fit: cover;
+    height: 300px;
+    width: 100%;
   }
 
   .hide-skeleton {
@@ -450,6 +592,16 @@ form button {
     display: none;
   }
 
+  .logout-modal {
+    width: 30%;
+  }
+
+  .modal-image {
+    object-fit: cover;
+    height: 330px;
+    width: 100%;
+  }
+
   .hide-skeleton {
     display: block;
   }
@@ -507,6 +659,17 @@ form button {
     display: none !important;
   }
 
+  .logout-modal {
+    height: 200px;
+    width: 20%;
+  }
+
+  .modal-image {
+    object-fit: cover;
+    height: 330px;
+    width: 100%;
+  }
+
   .hide-skeleton-tablet {
     display: block;
   }
@@ -537,5 +700,9 @@ form button {
   .swiper-button-next,
   .swiper-button-prev {
     display: none !important;
+  }
+
+  .tooltip-hidden {
+    display: none;
   }
 }
