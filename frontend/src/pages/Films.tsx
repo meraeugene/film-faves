@@ -14,12 +14,11 @@ const Films = () => {
   } = useFilmsContext();
 
   const [isLoading, setIsLoading] = useState(true); // Add isLoading state
-
-  const [latestFilms, setLatestFilms] = useState<Film[]>([]);
-  const [actionAdventureFilms, setActionAdventureFilms] = useState<Film[]>([]);
-  const [animationFilms, setAnimationFilms] = useState<Film[]>([]);
-  const [documentaryFilms, setDocumentaryFilms] = useState<Film[]>([]);
-  const [thrillerFilms, setThrillerFilms] = useState<Film[]>([]);
+  const [latestFilms, setLatestFilms] = useState([]);
+  const [actionAdventureFilms, setActionAdventureFilms] = useState([]);
+  const [animationFilms, setAnimationFilms] = useState([]);
+  const [documentaryFilms, setDocumentaryFilms] = useState([]);
+  const [thrillerFilms, setThrillerFilms] = useState([]);
 
   useEffect(() => {
     const fetchFilms = async () => {
@@ -33,16 +32,20 @@ const Films = () => {
         // Filter films based on the current year after data is fetched
         const currentYear = new Date().getFullYear();
         setLatestFilms(
-          films.filter((film) => film.release_date === currentYear),
+          data.filter((film: Film) => film.release_date === currentYear),
         );
         setActionAdventureFilms(
-          films.filter((film) => film.genre === "action-adventure"),
+          data.filter((film: Film) => film.genre === "action-adventure"),
         );
-        setAnimationFilms(films.filter((film) => film.genre === "animation"));
+        setAnimationFilms(
+          data.filter((film: Film) => film.genre === "animation"),
+        );
         setDocumentaryFilms(
-          films.filter((film) => film.genre === "documentaries"),
+          data.filter((film: Film) => film.genre === "documentaries"),
         );
-        setThrillerFilms(films.filter((film) => film.genre === "thriller"));
+        setThrillerFilms(
+          data.filter((film: Film) => film.genre === "thriller"),
+        );
       } catch (error) {
         console.error("Error fetching films:", error);
         setIsLoading(false); // Error occurred, set isLoading to false
