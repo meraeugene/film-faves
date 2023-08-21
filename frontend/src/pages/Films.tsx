@@ -8,10 +8,7 @@ import FilmCardSkeleton from "../components/FilmCardSkeleton";
 import { Film } from "../types/Film";
 
 const Films = () => {
-  const {
-    state: { films },
-    dispatch,
-  } = useFilmsContext();
+  const { dispatch } = useFilmsContext();
 
   const [isLoading, setIsLoading] = useState(true); // Add isLoading state
   const [latestFilms, setLatestFilms] = useState([]);
