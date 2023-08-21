@@ -14,7 +14,12 @@ const Films = () => {
   } = useFilmsContext();
 
   const [isLoading, setIsLoading] = useState(true); // Add isLoading state
-  const [latestFilms, setLatestFilms] = useState([]);
+
+  const [latestFilms, setLatestFilms] = useState<Film[]>([]);
+  const [actionAdventureFilms, setActionAdventureFilms] = useState<Film[]>([]);
+  const [animationFilms, setAnimationFilms] = useState<Film[]>([]);
+  const [documentaryFilms, setDocumentaryFilms] = useState<Film[]>([]);
+  const [thrillerFilms, setThrillerFilms] = useState<Film[]>([]);
 
   useEffect(() => {
     const fetchFilms = async () => {
@@ -27,10 +32,17 @@ const Films = () => {
 
         // Filter films based on the current year after data is fetched
         const currentYear = new Date().getFullYear();
-        const filteredLatestFilms = data.filter(
-          (film: Film) => film.release_date === currentYear,
+        setLatestFilms(
+          films.filter((film) => film.release_date === currentYear),
         );
-        setLatestFilms(filteredLatestFilms);
+        setActionAdventureFilms(
+          films.filter((film) => film.genre === "action-adventure"),
+        );
+        setAnimationFilms(films.filter((film) => film.genre === "animation"));
+        setDocumentaryFilms(
+          films.filter((film) => film.genre === "documentaries"),
+        );
+        setThrillerFilms(films.filter((film) => film.genre === "thriller"));
       } catch (error) {
         console.error("Error fetching films:", error);
         setIsLoading(false); // Error occurred, set isLoading to false
@@ -41,23 +53,11 @@ const Films = () => {
     fetchFilms();
   }, [dispatch]);
 
-  // Ensure films array exists and is not empty
-  const isValidFilmsArray = Array.isArray(films) && films.length > 0;
-
-  const actionAdventureFilms = films.filter(
-    (film) => film.genre === "action-adventure",
-  );
-  const animationFilms = films.filter((film) => film.genre === "animation");
-  const documentaryFilms = films.filter(
-    (film) => film.genre === "documentaries",
-  );
-  const thrillerFilms = films.filter((film) => film.genre === "thriller");
-
   return (
     <div className="films bg-dark  text-white">
       {isLoading ? (
         <FilmCardSkeleton cardNumber={3} />
-      ) : isValidFilmsArray ? (
+      ) : (
         <>
           <SortedFilms title="new releases" sortedFilm={latestFilms} />
           <SortedFilms
@@ -68,8 +68,6 @@ const Films = () => {
           <SortedFilms title="documentaries" sortedFilm={documentaryFilms} />
           <SortedFilms title="thriller" sortedFilm={thrillerFilms} />{" "}
         </>
-      ) : (
-        <p>No films available.</p>
       )}
     </div>
   );
