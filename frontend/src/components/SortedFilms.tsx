@@ -8,6 +8,7 @@ import "swiper/css/navigation";
 
 import { Autoplay, Pagination, Navigation } from "swiper/modules";
 import { Link } from "react-router-dom";
+import RecommendCard from "./RecommendCard";
 
 interface SortedFilmsProps {
   title: string;
@@ -43,7 +44,7 @@ const SortedFilms: React.FC<SortedFilmsProps> = ({ title, sortedFilm }) => {
             "--swiper-pagination-color": "#fff",
           } as CSSProperties
         }
-        className="mySwiper"
+        className="mySwiper "
         centeredSlides={false}
         pagination={{
           clickable: true,
@@ -84,18 +85,31 @@ const SortedFilms: React.FC<SortedFilmsProps> = ({ title, sortedFilm }) => {
       >
         {sortedFilm.map((film) => {
           return (
-            <SwiperSlide key={film._id}>
-              <Link to={`/films/${film._id}`} onClick={handleClick}>
-                {/* <AdvancedImage
+            <>
+              <SwiperSlide key={film._id}>
+                <Link to={`/films/${film._id}`} onClick={handleClick}>
+                  {/* <AdvancedImage
                     cldImg={myImage}
                     plugins={[placeholder({ mode: "blur" }), lazyload()]}
                     className="image rounded-sm"
                   /> */}
-                <img src={film.image} alt={film.title} loading="lazy" />
-              </Link>
-            </SwiperSlide>
+                  <img
+                    src={film.image}
+                    alt={film.title}
+                    loading="lazy"
+                    className="image rounded-sm"
+                  />
+                </Link>
+              </SwiperSlide>
+            </>
           );
         })}
+        {sortedFilm.length < 6 &&
+          [...Array(6 - sortedFilm.length)].map((_, index) => (
+            <SwiperSlide key={index}>
+              <RecommendCard />
+            </SwiperSlide>
+          ))}
       </Swiper>
     </div>
   );

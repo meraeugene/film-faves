@@ -1,21 +1,33 @@
 import SortedFilms from "../components/SortedFilms";
 import { useEffect, useState } from "react"; // Import useState and useEffect
-
 import axios from "axios";
 import { useFilmsContext } from "../hooks/useFilmsContext";
 import FilmCardSkeleton from "../components/FilmCardSkeleton";
-
 import { Film } from "../types/Film";
+
+interface FilmGenreMap {
+  [key: string]: Film[];
+}
+
+const genreFilters = [
+  "action-adventure",
+  "animation",
+  "comedy",
+  "documentaries",
+  "filipino",
+  "horror",
+  "k-drama",
+  "romantic",
+  "sci-fi",
+  "southeast asian",
+  "thriller",
+];
 
 const Films = () => {
   const { dispatch } = useFilmsContext();
-
-  const [isLoading, setIsLoading] = useState(true); // Add isLoading state
   const [latestFilms, setLatestFilms] = useState([]);
-  const [actionAdventureFilms, setActionAdventureFilms] = useState([]);
-  const [animationFilms, setAnimationFilms] = useState([]);
-  const [documentaryFilms, setDocumentaryFilms] = useState([]);
-  const [thrillerFilms, setThrillerFilms] = useState([]);
+  const [isLoading, setIsLoading] = useState(true);
+  const [filmsByGenre, setFilmsByGenre] = useState<FilmGenreMap>({});
 
   useEffect(() => {
     const fetchFilms = async () => {
@@ -27,22 +39,17 @@ const Films = () => {
         dispatch({ type: "SET_FILMS", payload: data });
         setIsLoading(false); // Data fetched, set isLoading to false
 
-        // Filter films based on the current year after data is fetched
+        // Organize films by genre
+        const filmsGroupedByGenre = genreFilters.reduce((acc, genre) => {
+          acc[genre] = data.filter((film: Film) => film.genre === genre);
+          return acc;
+        }, {} as FilmGenreMap);
+        setFilmsByGenre(filmsGroupedByGenre);
+
+        // Filter latest films based on the current year
         const currentYear = new Date().getFullYear();
         setLatestFilms(
           data.filter((film: Film) => film.release_date === currentYear),
-        );
-        setActionAdventureFilms(
-          data.filter((film: Film) => film.genre === "action-adventure"),
-        );
-        setAnimationFilms(
-          data.filter((film: Film) => film.genre === "animation"),
-        );
-        setDocumentaryFilms(
-          data.filter((film: Film) => film.genre === "documentaries"),
-        );
-        setThrillerFilms(
-          data.filter((film: Film) => film.genre === "thriller"),
         );
       } catch (error) {
         console.error("Error fetching films:", error);
@@ -61,13 +68,13 @@ const Films = () => {
       ) : (
         <>
           <SortedFilms title="new releases" sortedFilm={latestFilms} />
-          <SortedFilms
-            title="action-adventure"
-            sortedFilm={actionAdventureFilms}
-          />
-          <SortedFilms title="anime" sortedFilm={animationFilms} />
-          <SortedFilms title="documentaries" sortedFilm={documentaryFilms} />
-          <SortedFilms title="thriller" sortedFilm={thrillerFilms} />{" "}
+          {genreFilters.map((genre) => (
+            <SortedFilms
+              key={genre}
+              title={genre}
+              sortedFilm={filmsByGenre[genre]}
+            />
+          ))}
         </>
       )}
     </div>
