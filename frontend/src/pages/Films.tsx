@@ -5,6 +5,8 @@ import axios from "axios";
 import { useFilmsContext } from "../hooks/useFilmsContext";
 import FilmCardSkeleton from "../components/FilmCardSkeleton";
 
+import { Film } from "../types/Film";
+
 const Films = () => {
   const {
     state: { films },
@@ -12,6 +14,7 @@ const Films = () => {
   } = useFilmsContext();
 
   const [isLoading, setIsLoading] = useState(true); // Add isLoading state
+  const [latestFilms, setLatestFilms] = useState([]);
 
   useEffect(() => {
     const fetchFilms = async () => {
@@ -21,6 +24,13 @@ const Films = () => {
         const { data } = result.data;
         dispatch({ type: "SET_FILMS", payload: data });
         setIsLoading(false); // Data fetched, set isLoading to false
+
+        // Filter films based on the current year after data is fetched
+        const currentYear = new Date().getFullYear();
+        const filteredLatestFilms = data.filter(
+          (film: Film) => film.release_date === currentYear,
+        );
+        setLatestFilms(filteredLatestFilms);
       } catch (error) {
         console.error("Error fetching films:", error);
         setIsLoading(false); // Error occurred, set isLoading to false
@@ -31,8 +41,8 @@ const Films = () => {
     fetchFilms();
   }, [dispatch]);
 
-  const currentYear = new Date().getFullYear();
-  const latestFilms = films.filter((film) => film.release_date === currentYear);
+  // Ensure films array exists and is not empty
+  const isValidFilmsArray = Array.isArray(films) && films.length > 0;
 
   const actionAdventureFilms = films.filter(
     (film) => film.genre === "action-adventure",
@@ -46,8 +56,8 @@ const Films = () => {
   return (
     <div className="films bg-dark  text-white">
       {isLoading ? (
-        <FilmCardSkeleton cardNumber={3} /> // Display loading indicator
-      ) : (
+        <FilmCardSkeleton cardNumber={3} />
+      ) : isValidFilmsArray ? (
         <>
           <SortedFilms title="new releases" sortedFilm={latestFilms} />
           <SortedFilms
@@ -58,6 +68,8 @@ const Films = () => {
           <SortedFilms title="documentaries" sortedFilm={documentaryFilms} />
           <SortedFilms title="thriller" sortedFilm={thrillerFilms} />{" "}
         </>
+      ) : (
+        <p>No films available.</p>
       )}
     </div>
   );
