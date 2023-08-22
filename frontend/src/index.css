@@ -66,7 +66,7 @@ a:active {
 }
 
 .nav {
-  padding: 0.4em 1em;
+  padding: 0.5em 1em;
   position: sticky;
   top: 0;
   width: 100%;
@@ -101,9 +101,9 @@ a:active {
 }
 
 .button {
-  color: black;
-  border: 1px solid black;
-  padding: 1px 16px;
+  color: #010101;
+  padding: 4px 16px !important;
+  background-color: #fff;
   border-radius: 4px;
   font-family: Aquire;
 }
@@ -317,6 +317,11 @@ form button {
     padding-left: 1em;
     height: 90vh;
     width: 90%;
+  }
+
+  .button {
+    padding-top: 1px;
+    padding-bottom: 1px;
   }
 
   .nav-menu {
@@ -554,9 +559,22 @@ form button {
   }
 }
 
+@media screen and (min-width: 1366px) {
+  .image,
+  .recommend-card,
+  .film-image,
+  .film-details-skeleton-img-tablet {
+    height: 450px !important;
+  }
+}
+
 @media screen and (min-width: 1440px) {
   .skeleton-card-desktop {
     display: none !important;
+  }
+
+  .image {
+    height: 320px !important;
   }
 
   .modal-image {

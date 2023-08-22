@@ -41,16 +41,16 @@ const FilmCardSkeleton = ({ cardNumber }: CardNumberProps) => {
           <Skeleton height={35} className="mb-4 " width="30%" />
           <div className="card-skeleton-desktop ">
             <div className="card-img">
-              <Skeleton height={330} />
+              <Skeleton height={400} />
             </div>
             <div className="card-img">
-              <Skeleton height={330} />
+              <Skeleton height={400} />
             </div>
             <div className="card-img">
-              <Skeleton height={330} />
+              <Skeleton height={400} />
             </div>
             <div className="card-img">
-              <Skeleton height={330} />
+              <Skeleton height={400} />
             </div>
           </div>
         </div>
