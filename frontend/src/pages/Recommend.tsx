@@ -197,7 +197,7 @@ const Recommend = () => {
   };
 
   return (
-    <div className="recommend mb-12 h-full bg-dark px-6 pt-16 uppercase text-white">
+    <div className="recommend mb-12 h-full bg-dark px-4 py-6 uppercase text-white md:py-8">
       <h1 className="text-center font-researcher text-3xl md:text-4xl lg:text-5xl">
         Recommend
       </h1>

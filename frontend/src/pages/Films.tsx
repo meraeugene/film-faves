@@ -75,7 +75,7 @@ const Films = () => {
   };
 
   return (
-    <div className="films bg-dark  text-white">
+    <div className="bg-dark px-4  py-6 text-white md:px-10 md:py-8">
       {isLoading ? (
         <FilmCardSkeleton cardNumber={3} />
       ) : (

@@ -60,7 +60,7 @@ const FilmDetails = () => {
       {isLoading ? (
         <FilmDetailsSkeleton />
       ) : (
-        <div className="film-details flex h-full flex-col justify-center bg-dark px-4 pt-16 text-white md:px-8">
+        <div className="film-details flex h-full flex-col justify-center bg-dark px-4 py-6 text-white md:px-10 md:py-8">
           <Link to="/films" className=" w-0 ">
             <Button className="mb-8  font-aquire tracking-widest">
               <svg

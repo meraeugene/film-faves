@@ -81,7 +81,7 @@ const Navbar = () => {
   );
 
   return (
-    <div className="nav flex items-center justify-between">
+    <div className="nav flex items-center justify-between ">
       <Link to="/" onClick={() => setShowProfile(false)}>
         <h1 className="font-researcher lg:text-2xl">FILM FAVES</h1>
       </Link>
