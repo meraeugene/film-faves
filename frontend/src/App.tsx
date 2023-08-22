@@ -16,6 +16,7 @@ const LazyRecommend = React.lazy(() => import("./pages/Recommend"));
 const LazySignup = React.lazy(() => import("./pages/Signup"));
 const LazyLogin = React.lazy(() => import("./pages/Login"));
 const LazyFilmDetails = React.lazy(() => import("./pages/FilmDetails"));
+const LazyGenre = React.lazy(() => import("./pages/Genre"));
 
 function App() {
   return (
@@ -44,6 +45,14 @@ function App() {
             element={
               <React.Suspense fallback={<Loader />}>
                 <LazyFilmDetails />
+              </React.Suspense>
+            }
+          ></Route>
+          <Route
+            path="/films/genre/:genre"
+            element={
+              <React.Suspense fallback={<Loader />}>
+                <LazyGenre />
               </React.Suspense>
             }
           ></Route>

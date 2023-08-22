@@ -39,14 +39,20 @@ const SortedFilms: React.FC<SortedFilmsProps> = ({ title, sortedFilm }) => {
       .join(" ");
   };
 
+  const handleGenreClick = () => {
+    window.scroll(0, 0);
+  };
+
   return (
     <div className="films__container relative mb-6 xl:mb-14 ">
       <div className="mb-6 inline-block cursor-pointer items-center xl:text-4xl">
-        <Tooltip label={`Browse All ${capitalizeWords(title)} Films`}>
-          <h1 className="inline-block align-middle font-aquire  text-xl font-bold capitalize tracking-widest md:text-3xl xl:text-4xl ">
-            {title}
-          </h1>
-        </Tooltip>
+        <Link to={`/films/genre/${title}`} onClick={handleGenreClick}>
+          <Tooltip label={`Browse All ${capitalizeWords(title)} Films`}>
+            <h1 className="inline-block align-middle font-aquire  text-xl font-bold capitalize tracking-widest md:text-3xl xl:text-4xl ">
+              {title}
+            </h1>
+          </Tooltip>
+        </Link>
         <svg
           xmlns="http://www.w3.org/2000/svg"
           fill="none"

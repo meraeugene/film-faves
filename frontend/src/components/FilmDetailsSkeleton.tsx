@@ -2,7 +2,7 @@ import Skeleton from "react-loading-skeleton";
 
 const FilmDetailsSkeleton = () => {
   return (
-    <div className="h-full bg-dark px-4 pb-8 pt-16 md:px-8">
+    <div className="h-full bg-dark px-4 pb-8 pt-8 md:px-8">
       <div className="film-details-skeleton__mobile">
         <Skeleton width={105} height={40} />
         <Skeleton height={425} className="mt-8" />

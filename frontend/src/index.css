@@ -309,7 +309,7 @@ form button {
   );
 }
 
-/*  */
+/* top films */
 
 .top-films-number {
   font-size: 5.5rem;
@@ -319,6 +319,21 @@ form button {
   align-items: center;
   justify-content: flex-end;
   font-family: "Zen Dots", cursive;
+}
+
+/* masonry */
+.masonry {
+  columns: 2;
+  column-gap: 1em;
+}
+
+.masonry .masonry-img__container {
+  break-inside: avoid;
+}
+
+.masonry img {
+  margin-bottom: 1em;
+  border-radius: 4px;
 }
 
 /* media query */
@@ -457,6 +472,15 @@ form button {
     display: none;
   }
 
+  .masonry {
+    columns: 3;
+    column-gap: 1.3em;
+  }
+
+  .masonry img {
+    margin-bottom: 1.3em;
+  }
+
   .genre-movie__modal {
     padding-right: 2em;
     padding-left: 2em;
@@ -529,6 +553,11 @@ form button {
   .skeleton-card-tablet,
   .skeleton-card-large-screen {
     display: none;
+  }
+
+  .masonry {
+    columns: 4;
+    column-gap: 1.5em;
   }
 
   .modal-image {
