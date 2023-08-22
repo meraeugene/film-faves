@@ -6,6 +6,10 @@ import { SkeletonTheme } from "react-loading-skeleton";
 import "react-loading-skeleton/dist/skeleton.css";
 import Loader from "./components/Loader";
 
+import { inject } from "@vercel/analytics";
+
+inject();
+
 const LazyHome = React.lazy(() => import("./pages/Home"));
 const LazyFilms = React.lazy(() => import("./pages/Films"));
 const LazyRecommend = React.lazy(() => import("./pages/Recommend"));
