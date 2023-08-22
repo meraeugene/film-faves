@@ -1,4 +1,4 @@
-@import url("https://fonts.googleapis.com/css2?family=Outfit&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Outfit&family=Zen+Dots&display=swap");
 
 @tailwind base;
 @tailwind components;
@@ -18,11 +18,11 @@
   width: 12px;
 }
 ::-webkit-scrollbar-track {
-  background: #313131;
+  background-color: rgb(24, 24, 24);
 }
 ::-webkit-scrollbar-thumb {
   background-color: #fff;
-  border: 3px solid #313131;
+  border: 3px solid rgb(24, 24, 24);
   border-radius: 8px;
 }
 
@@ -111,27 +111,28 @@ a:active {
 /* genre movie modal */
 .main-container__modal {
   position: fixed;
-  height: 100vh;
+  height: 100%;
   width: 100%;
   top: 0;
   left: 0;
-  background-color: rgba(0, 0, 0, 0.8);
+  background-color: rgba(0, 0, 0, 0.5);
   z-index: 10;
   display: flex;
   align-items: center;
   justify-content: center;
+  overflow: hidden !important; /* Hide scrollbar from the overlay */
 }
 
 .genre-movie__modal {
-  height: 90vh;
-  width: 80%;
-  background-color: rgb(24, 24, 24);
-  color: #fff;
-  border-radius: 2px;
-  position: relative;
-  overflow-y: auto;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
   padding-left: 2em;
   padding-right: 2em;
+  border-radius: 5px;
+  max-width: 80%;
+  background-color: rgba(0, 0, 0, 0.8);
 }
 
 .genre-movie__modal-close-btn {
@@ -308,6 +309,18 @@ form button {
   );
 }
 
+/*  */
+
+.top-films-number {
+  font-size: 5.5rem;
+  display: flex;
+  height: 210px;
+  width: 100%;
+  align-items: center;
+  justify-content: flex-end;
+  font-family: "Zen Dots", cursive;
+}
+
 /* media query */
 @media screen and (min-width: 320px) {
   .genre-movie__modal {
@@ -425,9 +438,14 @@ form button {
 
   .image,
   .recommend-card,
-  .card-img-skeleton {
+  .card-img-skeleton,
+  .top-films-number {
     width: 100% !important;
     height: 280px !important;
+  }
+
+  .top-films-number {
+    font-size: 7.5rem;
   }
 }
 
@@ -484,9 +502,14 @@ form button {
   }
 
   .image,
-  .recommend-card {
+  .recommend-card,
+  .top-films-number {
     width: 100% !important;
-    height: 340px !important;
+    height: 250px !important;
+  }
+
+  .top-films-number {
+    font-size: 6.5rem;
   }
 
   .film-info {
@@ -548,10 +571,16 @@ form button {
     display: flex;
   }
 
-  .image {
+  .image,
+  .top-films-number,
+  .recommend-card {
     width: 100% !important;
-    height: 340px;
+    height: 360px !important;
     object-fit: cover !important;
+  }
+
+  .top-films-number {
+    font-size: 9rem;
   }
 
   .nav {
@@ -562,9 +591,12 @@ form button {
 @media screen and (min-width: 1366px) {
   .image,
   .recommend-card,
-  .film-image,
   .film-details-skeleton-img-tablet {
-    height: 450px !important;
+    height: 350px !important;
+  }
+
+  .film-image {
+    height: auto;
   }
 }
 

@@ -40,7 +40,7 @@ function App() {
             }
           ></Route>
           <Route
-            path="/films/:id"
+            path="/films/:id/:title"
             element={
               <React.Suspense fallback={<Loader />}>
                 <LazyFilmDetails />

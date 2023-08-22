@@ -13,15 +13,10 @@ import { Tooltip } from "@chakra-ui/react";
 
 interface SortedFilmsProps {
   title: string;
-  sortedFilm: Film[];
-  openGenreModal: (genre: string) => void;
+  sortedFilm?: Film[];
 }
 
-const SortedFilms: React.FC<SortedFilmsProps> = ({
-  title,
-  sortedFilm,
-  openGenreModal,
-}) => {
+const SortedFilms: React.FC<SortedFilmsProps> = ({ title, sortedFilm }) => {
   if (!Array.isArray(sortedFilm)) {
     // Handle the case where sortedFilm is not an array
     return <p>No films available</p>;
@@ -46,10 +41,7 @@ const SortedFilms: React.FC<SortedFilmsProps> = ({
 
   return (
     <div className="films__container relative mb-6 xl:mb-14 ">
-      <div
-        className="mb-6 inline-block cursor-pointer items-center xl:text-4xl"
-        onClick={() => openGenreModal(title)}
-      >
+      <div className="mb-6 inline-block cursor-pointer items-center xl:text-4xl">
         <Tooltip label={`Browse All ${capitalizeWords(title)} Films`}>
           <h1 className="inline-block align-middle font-aquire  text-xl font-bold capitalize tracking-widest md:text-3xl xl:text-4xl ">
             {title}
@@ -95,12 +87,17 @@ const SortedFilms: React.FC<SortedFilmsProps> = ({
             spaceBetween: 10,
           },
           768: {
-            slidesPerView: 3,
+            slidesPerView: 4,
             slidesPerGroup: 1,
             spaceBetween: 20,
           },
           1024: {
             slidesPerView: 4,
+            slidesPerGroup: 1,
+            spaceBetween: 20,
+          },
+          1366: {
+            slidesPerView: 5,
             slidesPerGroup: 1,
             spaceBetween: 20,
           },
@@ -120,7 +117,10 @@ const SortedFilms: React.FC<SortedFilmsProps> = ({
         {sortedFilm.map((film) => {
           return (
             <SwiperSlide key={film._id}>
-              <Link to={`/films/${film._id}`} onClick={handleClick}>
+              <Link
+                to={`/films/${film._id}/${film.title}`}
+                onClick={handleClick}
+              >
                 {/* <AdvancedImage
                     cldImg={myImage}
                     plugins={[placeholder({ mode: "blur" }), lazyload()]}

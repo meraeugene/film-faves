@@ -44,8 +44,10 @@ const FilmDetails = () => {
     fetchData();
   }, [id]);
 
-  const handleImageClick = (filmId: string | undefined) => {
-    window.location.href = `/films/${filmId}`;
+  const handleImageClick = (filmId: string | undefined, filmTitle: string) => {
+    if (singleFilm) {
+      window.location.href = `/films/${filmId}/${filmTitle}`;
+    }
   };
 
   const sameGenreFilms = films
@@ -171,6 +173,11 @@ const FilmDetails = () => {
                       slidesPerGroup: 1,
                       spaceBetween: 20,
                     },
+                    1366: {
+                      slidesPerView: 5,
+                      slidesPerGroup: 1,
+                      spaceBetween: 20,
+                    },
                     1440: {
                       slidesPerView: 6,
                       slidesPerGroup: 1,
@@ -184,9 +191,9 @@ const FilmDetails = () => {
                     return (
                       <SwiperSlide key={film._id}>
                         <Link
-                          to={`/films/${film._id}`}
+                          to={`/films/${film._id}/${film.title}`}
                           key={film._id}
-                          onClick={() => handleImageClick(film._id)}
+                          onClick={() => handleImageClick(film._id, film.title)}
                         >
                           <img
                             src={film.image}

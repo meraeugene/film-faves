@@ -49,7 +49,7 @@ const Login = () => {
   }, [error]);
 
   return (
-    <div className="flex h-screen flex-col  items-center justify-center bg-dark px-6 pb-12 uppercase  text-white">
+    <div className="flex h-screen  flex-col  items-center justify-center bg-dark px-6  uppercase  text-white">
       <h1 className="mb-8 text-center font-researcher text-3xl">LOG IN</h1>
       <form onSubmit={handleSubmit} className="form flex w-full flex-col gap-6">
         <InputField

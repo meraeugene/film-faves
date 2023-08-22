@@ -53,6 +53,9 @@ const FilmDetailsSkeleton = () => {
           <div className=" flex-1">
             <Skeleton className="film-details-skeleton-img-tablet" />
           </div>
+          <div className=" flex-1">
+            <Skeleton className="film-details-skeleton-img-tablet" />
+          </div>
           <div className=" hide-skeleton flex-1">
             <Skeleton className="film-details-skeleton-img-tablet" />
           </div>

@@ -26,13 +26,16 @@ const FilmCardSkeleton = ({ cardNumber }: CardNumberProps) => {
           <Skeleton height={35} className="mb-4 " width="35%" />
           <div className="card-skeleton-tablet ">
             <div className="card-img">
-              <Skeleton height={330} />
+              <Skeleton height={250} />
             </div>
             <div className="card-img">
-              <Skeleton height={330} />
+              <Skeleton height={250} />
             </div>
             <div className="card-img">
-              <Skeleton height={330} />
+              <Skeleton height={250} />
+            </div>
+            <div className="card-img">
+              <Skeleton height={250} />
             </div>
           </div>
         </div>
@@ -41,16 +44,19 @@ const FilmCardSkeleton = ({ cardNumber }: CardNumberProps) => {
           <Skeleton height={35} className="mb-4 " width="30%" />
           <div className="card-skeleton-desktop ">
             <div className="card-img">
-              <Skeleton height={400} />
+              <Skeleton height={360} />
             </div>
             <div className="card-img">
-              <Skeleton height={400} />
+              <Skeleton height={360} />
             </div>
             <div className="card-img">
-              <Skeleton height={400} />
+              <Skeleton height={360} />
             </div>
             <div className="card-img">
-              <Skeleton height={400} />
+              <Skeleton height={360} />
+            </div>
+            <div className="card-img">
+              <Skeleton height={360} />
             </div>
           </div>
         </div>
