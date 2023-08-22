@@ -116,11 +116,11 @@ const Films = () => {
               </Tooltip>
             </div>
 
-            <h1 className="t mt-12 text-center font-aquire  text-[26px] tracking-widest md:mt-16 md:text-5xl xl:text-6xl">
+            <h1 className="t mt-12 text-center font-aquire  text-[22px] tracking-widest md:mt-16 md:text-5xl xl:text-6xl">
               {selectedGenre}
             </h1>
 
-            <div className="mt-3 grid grid-cols-2 gap-4 md:mt-6 md:grid-cols-3 lg:grid-cols-4 xl:mt-8 xl:grid-cols-6">
+            <div className="mt-6 grid grid-cols-2 gap-4 md:mt-10 md:grid-cols-3 lg:grid-cols-4 xl:mt-8 xl:grid-cols-6">
               {filmsByGenre[selectedGenre]?.map((film) => (
                 <Link
                   to={`/films/${film._id}`}

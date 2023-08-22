@@ -15,7 +15,6 @@ const Navbar = () => {
   const handleLogout = () => {
     logout();
     setShowProfile(false);
-    setShowLogoutModal(false);
   };
 
   const { user } = useAuthContext();
@@ -23,19 +22,6 @@ const Navbar = () => {
   const toast = useToast();
 
   const [showProfile, setShowProfile] = useState(false);
-
-  const [showLogoutModal, setShowLogoutModal] = useState(false);
-
-  const showModal = () => {
-    setShowLogoutModal(true);
-    document.body.classList.add("modal-open"); // Add this line
-  };
-
-  const closeModal = () => {
-    setShowLogoutModal(false);
-    setShowProfile(false);
-    document.body.classList.remove("modal-open"); // Add this line
-  };
 
   const recommendFilmButton = user ? (
     <Link
@@ -111,7 +97,7 @@ const Navbar = () => {
                 strokeWidth={1.5}
                 stroke="currentColor"
                 className="h-6 w-6 cursor-pointer"
-                onClick={showModal}
+                onClick={handleLogout}
               >
                 <path
                   strokeLinecap="round"
@@ -191,7 +177,7 @@ const Navbar = () => {
               </svg>
               <span>Feedback</span>
             </div>
-            <button onClick={showModal} className="flex items-center gap-2">
+            <button onClick={handleLogout} className="flex items-center gap-2">
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 viewBox="0 0 24 24"
@@ -240,50 +226,6 @@ const Navbar = () => {
               </svg>
             </Tooltip>
           </>
-        )}
-
-        {showLogoutModal && (
-          <div className="logout-modal-bg">
-            <div className="logout-modal">
-              <div className="logout-modal__header flex items-center gap-2 ">
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  fill="none"
-                  viewBox="0 0 24 24"
-                  strokeWidth={1.5}
-                  stroke="currentColor"
-                  className="h-6 w-6"
-                >
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    d="M15.75 9V5.25A2.25 2.25 0 0013.5 3h-6a2.25 2.25 0 00-2.25 2.25v13.5A2.25 2.25 0 007.5 21h6a2.25 2.25 0 002.25-2.25V15M12 9l-3 3m0 0l3 3m-3-3h12.75"
-                  />
-                </svg>
-                <h1 className="font-aquire text-xl tracking-widest md:text-2xl">
-                  Log out
-                </h1>
-              </div>
-              <div className="logout-modal__body font-outfit text-lg tracking-wide  md:text-xl">
-                <p>Are you sure you want to logout? </p>
-              </div>
-
-              <div className="logout-model__footer flex items-center justify-end gap-2 pr-[1em]">
-                <button
-                  className="no-btn font-aquire font-bold tracking-widest"
-                  onClick={closeModal}
-                >
-                  No
-                </button>
-                <button
-                  className="yes-btn font-aquire font-bold tracking-widest text-black"
-                  onClick={handleLogout}
-                >
-                  Yes
-                </button>
-              </div>
-            </div>
-          </div>
         )}
       </div>
     </div>

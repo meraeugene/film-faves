@@ -141,50 +141,6 @@ a:active {
   overflow: hidden;
 }
 
-/* logout modal */
-.logout-modal-bg {
-  position: fixed;
-  height: 100vh;
-  width: 100%;
-  top: 0;
-  left: 0;
-  background-color: rgba(0, 0, 0, 0.7);
-  z-index: 10;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
-.logout-modal {
-  height: 30vh;
-  width: 80%;
-  background-color: #2d3748;
-  border-radius: 4px;
-  position: relative;
-  overflow-y: auto;
-}
-
-.logout-modal__header {
-  width: 100%;
-  padding: 0.7em 0 0.7em 0.7em;
-}
-
-.logout-modal__body {
-  padding: 0.7em 0.8em;
-}
-
-.logout-model__footer .no-btn {
-  background-color: rgba(255, 255, 255, 0.3);
-  padding: 0.4em 1em;
-  border-radius: 2px;
-}
-
-.logout-model__footer .yes-btn {
-  background-color: #feb2b2;
-  padding: 0.4em 1em;
-  border-radius: 2px;
-}
-
 /* form */
 .form {
   max-width: 400px;
@@ -356,7 +312,7 @@ form button {
     margin-top: 0;
     padding-right: 1em;
     padding-left: 1em;
-    height: 90vh;
+    height: 80vh;
     width: 90%;
   }
 
@@ -410,10 +366,6 @@ form button {
     height: 190px;
     width: 100%;
   }
-
-  .logout-modal {
-    width: 70%;
-  }
 }
 
 @media screen and (min-width: 375px) {
@@ -426,10 +378,6 @@ form button {
     object-fit: cover;
     height: 220px;
     width: 100%;
-  }
-
-  .logout-modal {
-    width: 70%;
   }
 
   .nav-menu {
@@ -463,10 +411,6 @@ form button {
     display: none;
   }
 
-  .logout-modal {
-    width: 70%;
-  }
-
   .modal-image {
     object-fit: cover;
     height: 240px;
@@ -497,22 +441,10 @@ form button {
     display: none;
   }
 
-  .logout-modal {
-    width: 40%;
-  }
-
-  .logout-modal__header {
-    width: 100%;
-    padding: 1em 0 0 1em;
-  }
-
-  .logout-modal__body {
-    padding: 0.7em 1em;
-  }
-
   .genre-movie__modal {
     padding-right: 2em;
     padding-left: 2em;
+    height: 90vh;
   }
 
   .modal-image {
@@ -589,10 +521,6 @@ form button {
     display: none;
   }
 
-  .logout-modal {
-    width: 30%;
-  }
-
   .modal-image {
     object-fit: cover;
     height: 330px;
@@ -654,11 +582,6 @@ form button {
 @media screen and (min-width: 1440px) {
   .skeleton-card-desktop {
     display: none !important;
-  }
-
-  .logout-modal {
-    height: 200px;
-    width: 20%;
   }
 
   .modal-image {
