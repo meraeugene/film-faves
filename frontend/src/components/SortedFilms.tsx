@@ -61,7 +61,7 @@ const SortedFilms: React.FC<SortedFilmsProps> = ({
           viewBox="0 0 24 24"
           strokeWidth={1.5}
           stroke="currentColor"
-          className="ml-2 inline-block h-4 w-4 align-middle xl:h-8 xl:w-8"
+          className="ml-1 inline-block h-4 w-4 align-middle xl:h-8 xl:w-8"
         >
           <path
             strokeLinecap="round"
