@@ -55,9 +55,6 @@ const FilmCardSkeleton = ({ cardNumber }: CardNumberProps) => {
             <div className="card-img">
               <Skeleton height={360} />
             </div>
-            <div className="card-img">
-              <Skeleton height={360} />
-            </div>
           </div>
         </div>
 

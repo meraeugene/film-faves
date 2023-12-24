@@ -268,8 +268,12 @@ form button {
 }
 
 .film-image {
-  width: 100%;
+  width: 45%;
   height: auto;
+}
+
+.film-info {
+  width: 50%;
 }
 
 .home-desc {
@@ -363,10 +367,9 @@ form button {
   }
 
   .film-details-skeleton-img {
-    height: 210px;
+    height: 220px;
   }
 
-  .image,
   .recommend-card,
   .card-img-skeleton {
     width: 100% !important;
@@ -378,10 +381,22 @@ form button {
     height: 170px;
     width: 100%;
   }
+
+  .film-info {
+    width: 100%;
+  }
+
+  .film-image {
+    width: 100%;
+    height: auto;
+  }
+
+  .film-desc_desktop {
+    display: none;
+  }
 }
 
 @media screen and (min-width: 360px) {
-  .image,
   .recommend-card,
   .card-img-skeleton {
     width: 100% !important;
@@ -397,6 +412,23 @@ form button {
     height: 190px;
     width: 100%;
   }
+
+  .film-image {
+    width: 45%;
+    height: auto;
+  }
+
+  .film-info {
+    width: 50%;
+  }
+
+  .film-desc_mobile {
+    display: none;
+  }
+
+  .film-desc_desktop {
+    display: block;
+  }
 }
 
 @media screen and (min-width: 375px) {
@@ -410,7 +442,6 @@ form button {
     display: none;
   }
 
-  .image,
   .recommend-card,
   .card-img-skeleton {
     width: 100% !important;
@@ -425,7 +456,15 @@ form button {
   }
 
   .film-details-skeleton-img {
-    height: 230px;
+    height: 240px;
+  }
+
+  .film-desc_mobile {
+    display: none;
+  }
+
+  .film-desc_desktop {
+    display: block;
   }
 }
 
@@ -445,13 +484,13 @@ form button {
 
   .film-details-skeleton-img {
     height: 260px;
+    width: 100%;
   }
 
   .film-details-skeleton__mobile {
     display: block;
   }
 
-  .image,
   .recommend-card,
   .card-img-skeleton,
   .top-films-number {
@@ -461,6 +500,14 @@ form button {
 
   .top-films-number {
     font-size: 7.5rem;
+  }
+
+  .film-desc_mobile {
+    display: none;
+  }
+
+  .film-desc_desktop {
+    display: block;
   }
 }
 
@@ -502,7 +549,8 @@ form button {
   }
 
   .film-details-skeleton-img-tablet {
-    height: 330px;
+    height: 270px;
+    width: 100%;
   }
 
   .skeleton-card-tablet,
@@ -525,7 +573,6 @@ form button {
     height: auto;
   }
 
-  .image,
   .recommend-card,
   .top-films-number {
     width: 100% !important;
@@ -536,16 +583,20 @@ form button {
     font-size: 6.5rem;
   }
 
-  .film-info {
-    max-width: 400px;
-  }
-
   .nav-menu {
     display: none;
   }
 
   .nav {
     padding: 0.7em 2.5rem;
+  }
+
+  .film-desc_mobile {
+    display: block;
+  }
+
+  .film-desc_desktop {
+    display: none;
   }
 }
 
@@ -588,9 +639,9 @@ form button {
     width: 300px !important;
   }
 
-  .film-info {
+  /* .film-info {
     max-width: 550px;
-  }
+  } */
 
   .profile-menu {
     display: none;
@@ -600,7 +651,6 @@ form button {
     display: flex;
   }
 
-  .image,
   .top-films-number,
   .recommend-card {
     width: 100% !important;
@@ -618,7 +668,6 @@ form button {
 }
 
 @media screen and (min-width: 1366px) {
-  .image,
   .recommend-card,
   .film-details-skeleton-img-tablet {
     height: 350px !important;
@@ -632,10 +681,6 @@ form button {
 @media screen and (min-width: 1440px) {
   .skeleton-card-desktop {
     display: none !important;
-  }
-
-  .image {
-    height: 320px !important;
   }
 
   .modal-image {

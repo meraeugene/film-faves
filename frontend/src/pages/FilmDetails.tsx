@@ -44,12 +44,6 @@ const FilmDetails = () => {
     fetchData();
   }, [id]);
 
-  const handleImageClick = (filmId: string | undefined, filmTitle: string) => {
-    if (singleFilm) {
-      window.location.href = `/films/${filmId}/${filmTitle}`;
-    }
-  };
-
   const sameGenreFilms = films
     ? films.filter(
         (film) =>
@@ -82,27 +76,25 @@ const FilmDetails = () => {
           </Link>
 
           {singleFilm !== null && (
-            <div className="flex w-full flex-col gap-6 md:flex-row">
+            <div className="flex w-full  flex-wrap gap-4 md:flex-row">
               <img
                 src={singleFilm.image}
                 alt={singleFilm.title}
                 loading="lazy"
-                className="film-image  rounded-sm object-cover"
+                className="film-image   rounded-sm object-cover"
               />
 
-              <div className="film-info font-outfit">
+              <div className="film-info  font-outfit">
                 <div className="mb-2">
                   <LikeButton initialLikes={singleFilm.likes} filmId={id} />
                 </div>
                 <span className="font-outfit xl:text-xl">
                   {singleFilm.release_date}
                 </span>
-                <h1 className="my-2 font-aquire text-xl font-bold tracking-widest xl:text-3xl">
+                <h1 className=" my-2 font-aquire text-base font-bold tracking-widest xl:text-3xl ">
                   {singleFilm.title}
                 </h1>
-                <p className="mb-4 mt-4 text-sm tracking-wider lg:text-lg">
-                  {singleFilm.description}
-                </p>
+
                 <h2 className="my-2 text-sm capitalize lg:text-lg">
                   <span className="text-gray-400">Genres: </span>
                   {singleFilm.genre}
@@ -114,23 +106,40 @@ const FilmDetails = () => {
                   {singleFilm.recommendedBy}
                 </h2>
                 <Link to={singleFilm.link}>
-                  <Button className="mt-6 flex gap-2 font-aquire tracking-widest">
-                    <svg
-                      xmlns="http://www.w3.org/2000/svg"
-                      viewBox="0 0 24 24"
-                      fill="currentColor"
-                      className="h-6 w-6"
+                  <Button
+                    className="mt-4 font-aquire tracking-widest"
+                    width={150}
+                  >
+                    <a
+                      href={singleFilm.link}
+                      target="_blank"
+                      rel="noreferrer noopener"
+                      className="flex items-center  gap-2"
                     >
-                      <path
-                        fillRule="evenodd"
-                        d="M2.25 12c0-5.385 4.365-9.75 9.75-9.75s9.75 4.365 9.75 9.75-4.365 9.75-9.75 9.75S2.25 17.385 2.25 12zm14.024-.983a1.125 1.125 0 010 1.966l-5.603 3.113A1.125 1.125 0 019 15.113V8.887c0-.857.921-1.4 1.671-.983l5.603 3.113z"
-                        clipRule="evenodd"
-                      />
-                    </svg>
-                    Watch Now
+                      <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        viewBox="0 0 24 24"
+                        fill="currentColor"
+                        className="h-6 w-6"
+                      >
+                        <path
+                          fillRule="evenodd"
+                          d="M2.25 12c0-5.385 4.365-9.75 9.75-9.75s9.75 4.365 9.75 9.75-4.365 9.75-9.75 9.75S2.25 17.385 2.25 12zm14.024-.983a1.125 1.125 0 010 1.966l-5.603 3.113A1.125 1.125 0 019 15.113V8.887c0-.857.921-1.4 1.671-.983l5.603 3.113z"
+                          clipRule="evenodd"
+                        />
+                      </svg>
+                      Watch Now
+                    </a>
                   </Button>
                 </Link>
+
+                <p className="film-desc_mobile mt-4 text-sm tracking-wider  lg:text-lg">
+                  {singleFilm.description}
+                </p>
               </div>
+              <p className="film-desc_desktop mt-2 text-sm tracking-wider  ">
+                {singleFilm.description}
+              </p>
             </div>
           )}
 
@@ -163,13 +172,18 @@ const FilmDetails = () => {
                       slidesPerGroup: 1,
                       spaceBetween: 10,
                     },
-                    768: {
+                    425: {
                       slidesPerView: 3,
+                      slidesPerGroup: 1,
+                      spaceBetween: 10,
+                    },
+                    768: {
+                      slidesPerView: 4,
                       slidesPerGroup: 1,
                       spaceBetween: 20,
                     },
                     1024: {
-                      slidesPerView: 4,
+                      slidesPerView: 5,
                       slidesPerGroup: 1,
                       spaceBetween: 20,
                     },
@@ -193,13 +207,15 @@ const FilmDetails = () => {
                         <Link
                           to={`/films/${film._id}/${film.title}`}
                           key={film._id}
-                          onClick={() => handleImageClick(film._id, film.title)}
                         >
                           <img
                             src={film.image}
                             alt={film.title}
-                            className="image  rounded-sm"
+                            className="image  h-full w-full rounded-sm object-cover"
                             loading="lazy"
+                            onClick={() => {
+                              window.scrollTo(0, 0);
+                            }}
                           />
                         </Link>
                       </SwiperSlide>
