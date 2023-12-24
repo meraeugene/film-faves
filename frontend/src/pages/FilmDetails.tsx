@@ -145,9 +145,13 @@ const FilmDetails = () => {
 
           <div className=" pb-8 pt-0">
             <div className="pt-14 md:pt-16">
-              <h1 className="pb-6 font-aquire text-2xl tracking-wider text-white xl:text-3xl">
-                You might like
-              </h1>
+              {sameGenreFilms.length !== 0 &&
+                sameGenreFilms.length !== null &&
+                sameGenreFilms.length !== undefined && (
+                  <h1 className="pb-6 font-aquire text-2xl tracking-wider text-white xl:text-3xl">
+                    You might like
+                  </h1>
+                )}
 
               {films !== null && films.length > 0 && (
                 <Swiper
