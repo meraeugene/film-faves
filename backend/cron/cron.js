@@ -1,7 +1,7 @@
 import { CronJob } from "cron";
 import https from "https";
 
-const URL = "https://filmsfavesapi.onrender.com/";
+const URL = "https://filmfaves.vercel.app/";
 
 const job = new CronJob("*/14 * * * *", function () {
   https
